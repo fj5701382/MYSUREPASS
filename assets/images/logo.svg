@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MySurePass logo">
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#F4FBF8"/>
+  <rect x="13" y="16" width="38" height="22" rx="6" fill="#1AAE82" opacity="0.18"/>
+  <path d="M23.5 24.5h17v12.5c0 2.7-2.2 4.9-4.9 4.9h-7.2c-2.7 0-4.9-2.2-4.9-4.9V24.5z" fill="#159E73"/>
+  <path d="M19 26.2v9.8c0 4.6 3.8 8.4 8.4 8.4h9.2c4.6 0 8.4-3.8 8.4-8.4V26.2H19zm11-7.3c-2 0-3.6 1.8-3.6 4.1v2.8h7.2v-2.8c0-2.3-1.6-4.1-3.6-4.1z" fill="#0C233A" opacity="0.96"/>
+  <path d="M26 22.2h12v6.2H26z" fill="#3CC48D"/>
+  <path d="M23.2 47.5h17.6" stroke="#0C233A" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

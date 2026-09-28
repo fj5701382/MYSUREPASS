@@ -1,0 +1,28 @@
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu.is-open {
+  display: block;
+  border-top: 1px solid var(--border);
+  background: rgba(255,255,255,0.96);
+  padding: 16px 20px 20px;
+}
+
+.mobile-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.mobile-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.mobile-actions .btn {
+  flex: 1;
+}

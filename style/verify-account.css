@@ -1,0 +1,78 @@
+.auth-verify-page .auth-right-inner {
+  width: min(100%, 400px);
+}
+
+.auth-verify-page .auth-right-inner h2 {
+  font-size: clamp(2.2rem, 2.8vw, 3.1rem);
+}
+
+.auth-verify-page .auth-subtext {
+  max-width: 510px;
+  margin-top: 10px;
+}
+
+.auth-verify-page .auth-form {
+  margin-top: 18px;
+}
+
+.auth-verify-page .otp-caption {
+  margin-top: 18px;
+}
+
+.auth-verify-page .auth-secondary-text {
+  margin-top: 12px;
+}
+
+.auth-verify-page .auth-inline-link {
+  margin-top: 14px;
+  font-size: 0.95rem;
+}
+
+.otp-input {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--auth-border);
+  background: rgba(255,255,255,0.18);
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1d2834;
+}
+
+.otp-input:focus {
+  border-color: var(--auth-green);
+  box-shadow: 0 0 0 2px rgba(62, 200, 157, 0.14);
+  outline: none;
+}
+
+.otp-input.filled {
+  border-color: var(--auth-green);
+  box-shadow: 0 0 0 2px rgba(62, 200, 157, 0.14);
+}
+
+.resend-btn {
+  border: none;
+  background: transparent;
+  color: var(--auth-green);
+  font-weight: 700;
+  padding: 0;
+  outline: none;
+}
+
+.resend-btn:disabled {
+  color: #7d8899;
+  cursor: not-allowed;
+}
+
+.auth-verify-page .auth-primary-button {
+  margin-top: 12px;
+}
+
+/* Account verification page mobile layout */
+@media (max-width: 480px) {
+  .auth-verify-page .otp-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(4px, 1.5vw, 8px);
+  }
+}

@@ -1,0 +1,74 @@
+.auth-register-page .auth-right-inner {
+  width: min(100%, 400px);
+}
+
+.auth-register-page .auth-right-brand {
+  margin-bottom: 12px;
+}
+
+.auth-register-page .auth-right-inner h2 {
+  font-size: clamp(2.3rem, 3vw, 3.2rem);
+}
+
+.auth-register-page .auth-subtext {
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+.auth-register-page .auth-progress {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+.auth-register-page .auth-progress .step-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.auth-register-page .auth-progress .stage-text {
+  font-size: 0.74rem;
+}
+
+.auth-register-page .auth-progress-bar {
+  width: 100%;
+}
+
+.auth-register-page .auth-form {
+  margin-top: 18px;
+}
+
+.auth-register-page .auth-field {
+  margin-bottom: 12px;
+}
+
+.auth-register-page .auth-two-col {
+  gap: 12px;
+}
+
+.auth-register-page .auth-primary-button {
+  margin-top: 12px;
+}
+
+.auth-register-page .auth-bottom-link {
+  margin-top: 16px;
+}
+
+/* Registration page mobile layout */
+@media (max-width: 480px) {
+  .auth-register-page .auth-two-col {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .auth-register-page .auth-progress {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .auth-register-page .auth-progress .step-text,
+  .auth-register-page .auth-progress .stage-text {
+    font-size: 14px;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+}

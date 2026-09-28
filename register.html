@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Register — MySurePass</title>
+    <meta name="description" content="Create your MySurePass account" />
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style/auth-shared.css" />
+    <link rel="stylesheet" href="style/register.css" />
+    <link rel="stylesheet" href="style/auth-responsive.css" />
+    <script src="script/auth-shared.js" defer></script>
+    <script src="script/register.js" defer></script>
+  </head>
+  <body class="auth-register-page">
+    <div class="auth-shell">
+      <aside class="auth-left-panel" aria-label="Brand intro panel">
+        <div class="auth-brand">
+          <span class="auth-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5v7.5A1.5 1.5 0 0 0 4.5 19.5h15A1.5 1.5 0 0 0 21 18V10.5"></path><path d="M12 3.5v10"></path><path d="M7 9.5h10"></path><path d="M7 7h10"></path></svg>
+          </span>
+          <span>MySurePass</span>
+        </div>
+
+        <div class="auth-left-copy">
+          <h1>Unlock Success in<br />WAEC, JAMB &amp; NECO</h1>
+          <p>Join thousands of Nigerian students practicing smarter with real CBT mock software and expert explanations.</p>
+        </div>
+
+        <div class="auth-badge" aria-label="Summary card">
+          <div class="auth-badge-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M4 20c1.5-3.5 5-5 8-5s6.5 1.5 8 5"></path></svg>
+          </div>
+          <div>
+            <span class="auth-badge-title">98.4% Pass Rate</span>
+            <span class="auth-badge-copy">Recorded in the 2023 exam season</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="auth-right-panel">
+        <div class="auth-right-inner">
+          <!-- <div class="auth-right-brand" aria-label="MySurePass brand">
+            <span class="auth-brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5v7.5A1.5 1.5 0 0 0 4.5 19.5h15A1.5 1.5 0 0 0 21 18V10.5"></path><path d="M12 3.5v10"></path><path d="M7 9.5h10"></path><path d="M7 7h10"></path></svg>
+            </span>
+            <span class="brand-wordmark"><span class="my">My</span><span class="sure">Sure</span><span class="pass">Pass</span></span>
+          </div> -->
+
+          <h2>Create your MySurePass account</h2>
+          <p class="auth-subtext">Start practicing, track your progress, and prepare smarter.</p>
+
+          <div class="auth-progress" aria-label="Registration progress">
+            <div class="step-text">Step 1 of 3</div>
+            <div class="stage-text">Personal Information</div>
+          </div>
+          <div class="auth-progress-bar" aria-hidden="true"><span class="fill"></span></div>
+
+          <form class="auth-form" id="registerForm" novalidate>
+            <div class="auth-two-col">
+              <div class="auth-field">
+                <label for="firstName">First Name</label>
+                <div class="input-shell">
+                  <input id="firstName" name="firstName" type="text" autocomplete="given-name" placeholder="e.g. Chinedu" aria-label="First Name" />
+                </div>
+                <div class="field-error" aria-live="polite"></div>
+              </div>
+
+              <div class="auth-field">
+                <label for="lastName">Last Name</label>
+                <div class="input-shell">
+                  <input id="lastName" name="lastName" type="text" autocomplete="family-name" placeholder="e.g. Adebayo" aria-label="Last Name" />
+                </div>
+                <div class="field-error" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div class="auth-field full-width">
+              <label for="dob">Date of Birth</label>
+              <div class="input-shell">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
+                </span>
+                <input id="dob" name="dob" type="text" autocomplete="bday" placeholder="DD / MM / YYYY" inputmode="numeric" aria-label="Date of Birth" />
+              </div>
+              <div class="field-error" aria-live="polite"></div>
+            </div>
+
+            <div class="auth-two-col">
+              <div class="auth-field">
+                <label for="state">State</label>
+                <div class="input-shell">
+                  <input id="state" name="state" type="text" autocomplete="address-level1" placeholder="Lagos" aria-label="State" />
+                </div>
+                <div class="field-error" aria-live="polite"></div>
+              </div>
+
+              <div class="auth-field">
+                <label for="city">City</label>
+                <div class="input-shell">
+                  <input id="city" name="city" type="text" autocomplete="address-level2" placeholder="Ikeja" aria-label="City" />
+                </div>
+                <div class="field-error" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div class="auth-field full-width">
+              <label for="phone">Phone Number</label>
+              <div class="input-shell">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1.13.36 2.25.69 3.31a2 2 0 0 1-.45 2.1L8 9.91a16 16 0 0 0 6.09 6.09l.78-.35a2 2 0 0 1 2.1.45c1.06.33 2.18.56 3.31.69A2 2 0 0 1 22 16.92z"></path></svg>
+                </span>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 08012345678" aria-label="Phone Number" />
+              </div>
+              <div class="field-error" aria-live="polite"></div>
+            </div>
+
+            <button class="auth-primary-button" type="submit">Continue</button>
+          </form>
+
+          <p class="auth-bottom-link">Already have an account? <a href="login.html">Log in</a></p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
