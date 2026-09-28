@@ -26,32 +26,34 @@
   --focus: #1ea67a;
 }
 
-body[data-theme="dark"] {
-  --page-bg: #0f172a;
-  --page-surface: #111c2f;
-  --card-bg: #162235;
-  --card-border: #2b3b52;
-  --card-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
-  --content-text: #e5edf9;
-  --muted: #a8b7cc;
-  --navy: #eaf3ff;
-  --navy-soft: #d9e8ff;
-  --green: #41d0a1;
-  --green-dark: #2cb78d;
-  --green-soft: rgba(65, 208, 161, 0.12);
-  --badge-waec: rgba(65, 208, 161, 0.08);
-  --badge-jamb: rgba(124, 146, 255, 0.08);
-  --badge-neco: rgba(239, 186, 92, 0.1);
-  --badge-nabteb: rgba(167, 202, 255, 0.08);
-  --filter-bg: rgba(255, 255, 255, 0.02);
-  --footer-bg: #050d1a;
-  --footer-text: #edf5ff;
-  --footer-muted: #b0bfd7;
-}
-
 body {
   background: var(--page-bg);
   color: var(--content-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #0a0e14;
+    --page-surface: #10151d;
+    --card-bg: #161b25;
+    --card-border: #252d3d;
+    --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    --content-text: #f1f5f9;
+    --muted: #8b9bb4;
+    --navy: #e2e8f0;
+    --navy-soft: #cbd5e1;
+    --green: #2dd4bf;
+    --green-dark: #14b8a6;
+    --green-soft: rgba(45, 212, 191, 0.12);
+    --badge-waec: rgba(45, 212, 191, 0.1);
+    --badge-jamb: rgba(96, 165, 250, 0.1);
+    --badge-neco: rgba(251, 191, 36, 0.1);
+    --badge-nabteb: rgba(167, 139, 250, 0.1);
+    --filter-bg: rgba(255, 255, 255, 0.03);
+    --footer-bg: #05070a;
+    --footer-text: #e2e8f0;
+    --footer-muted: #64748b;
+  }
 }
 
 img {
@@ -70,9 +72,7 @@ button {
 }
 
 .navbar {
-  background: var(--navy);
-  position: sticky;
-  top: 0;
+  background: var(--footer-bg);
   z-index: 30;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -147,23 +147,6 @@ button {
   gap: 12px;
 }
 
-.theme-toggle {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #f5f7fb;
-}
-
-.theme-icon {
-  width: 18px;
-  height: 18px;
-}
-
 .nav-login {
   color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
@@ -210,11 +193,26 @@ button {
 .page-main {
   min-height: calc(100vh - 180px);
   background: var(--page-bg);
+  position: relative;
+  z-index: 1;
 }
 
 .hero-section {
-  padding: 54px 0 24px;
-  background: var(--page-bg);
+  position: relative;
+  padding: 64px 0 40px;
+  background-color: var(--page-surface);
+  background-image: url('../assets/images/educational-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(var(--page-bg-rgb), 0.8), var(--page-bg));
+  pointer-events: none;
 }
 
 .hero-inner {
@@ -268,7 +266,9 @@ button {
 }
 
 .search-panel {
+  position: relative;
   background: var(--card-bg);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--card-border);
   border-radius: 18px;
   box-shadow: var(--card-shadow);
@@ -443,7 +443,7 @@ button {
   font-size: 0.82rem;
   line-height: 1.6;
   flex: 1;
-  min-height: 54px;
+  min-height: 48px;
 }
 
 .card-actions {
@@ -460,7 +460,7 @@ button {
   font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid var(--card-border);
-  background: #fff;
+  background: var(--page-surface);
   color: var(--content-text);
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }

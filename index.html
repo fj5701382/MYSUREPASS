@@ -16,49 +16,7 @@
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="navbar" id="navbar">
-  <div class="navbar-inner">
-    <a href="index.html" class="logo" aria-label="MySurePass home">
-      <img src="assets/images/logo.svg" alt="" class="logo-mark" width="28" height="28">
-      <span>MySurePass</span>
-    </a>
-
-    <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="index.html" aria-current="page" class="is-active">Home</a>
-      <a href="past-questions.html">Past Questions</a>
-      <a href="subjects.html">Subjects</a>
-      <a href="cbt-practice.html">CBT Practice</a>
-      <a href="teachers.html">For Teachers</a>
-      <a href="api.html">API</a>
-    </nav>
-
-    <div class="nav-actions">
-      <a href="login.html" class="btn btn-text">Log In</a>
-      <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
-      <a href="login.html" class="icon-btn" aria-label="Account">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </a>
-      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <nav aria-label="Mobile primary">
-      <a href="index.html" aria-current="page" class="is-active">Home</a>
-      <a href="past-questions.html">Past Questions</a>
-      <a href="subjects.html">Subjects</a>
-      <a href="cbt-practice.html">CBT Practice</a>
-      <a href="teachers.html">For Teachers</a>
-      <a href="api.html">API</a>
-    </nav>
-    <div class="mobile-actions">
-      <a href="login.html" class="btn btn-secondary">Log In</a>
-      <a href="register.html" class="btn btn-primary">Get Started</a>
-    </div>
-  </div>
-</header>
+<div data-shared-navbar></div>
 
 <main id="main">
   <section class="hero">
@@ -333,6 +291,7 @@
 
 </footer>
 
+<script src="script/pages-shared.js" defer></script>
 <script src="script/index.js" defer></script>
 </body>
 </html>

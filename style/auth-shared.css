@@ -31,23 +31,23 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --auth-bg-right: #0f172a;
-    --auth-text: #e2e8f0;
-    --auth-muted: #94a3b8;
-    --auth-border: #334155;
-    --auth-heading: #f8fafc;
-    --auth-input-bg: rgba(0,0,0,0.2);
-    --auth-input-focus-bg: rgba(0,0,0,0.4);
+    --auth-bg-right: #0a0e14;
+    --auth-text: #f1f5f9;
+    --auth-muted: #8b9bb4;
+    --auth-border: #252d3d;
+    --auth-heading: #ffffff;
+    --auth-input-bg: rgba(0,0,0,0.25);
+    --auth-input-focus-bg: rgba(0,0,0,0.5);
     --auth-input-icon: #64748b;
     --auth-placeholder: #64748b;
     --auth-pw-toggle: #94a3b8;
-    --auth-check-text: #e2e8f0;
-    --auth-divider: #475569;
-    --auth-social-bg: rgba(255,255,255,0.05);
-    --auth-social-hover: rgba(255,255,255,0.1);
+    --auth-check-text: #f1f5f9;
+    --auth-divider: #334155;
+    --auth-social-bg: rgba(255,255,255,0.03);
+    --auth-social-hover: rgba(255,255,255,0.08);
     --auth-bottom-text: #94a3b8;
     --auth-stage: #94a3b8;
-    --auth-otp-bg: rgba(0,0,0,0.2);
+    --auth-otp-bg: rgba(0,0,0,0.25);
     --auth-otp-caption: #94a3b8;
   }
 }
@@ -61,6 +61,22 @@ body {
   color: var(--auth-text);
   font-family: "Inter", "Segoe UI", sans-serif;
   min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 10% 14%, rgba(42, 165, 118, 0.14), transparent 16%),
+    radial-gradient(circle at 82% 18%, rgba(9, 123, 162, 0.11), transparent 18%),
+    linear-gradient(135deg, rgba(9, 27, 50, 0.03), rgba(17, 39, 60, 0.04)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240' fill='none'%3E%3Cg opacity='0.12' stroke='%23ffffff' stroke-width='1.2'%3E%3Cpath d='M34 157c39-44 74-71 122-71 26 0 46 17 64 37 13 15 20 43 20 43'/%3E%3Cpath d='M42 85h54v54H42zm64-32h68v68h-68zm68 78h46v42h-46z'/%3E%3Cpath d='M138 42l22 22 34-41'/%3E%3Ccircle cx='162' cy='124' r='16'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover, cover, cover, 220px 220px;
+  opacity: 0.9;
+  z-index: 0;
 }
 a, button, input { font: inherit; }
 a { color: inherit; text-decoration: none; }
@@ -211,11 +227,25 @@ img, svg { display: block; }
 
 .auth-right-panel {
   flex: 1;
-  background: var(--auth-bg-right);
+  background-color: var(--auth-bg-right);
+  background-image: url('../assets/images/educational-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: soft-light;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 32px 20px;
+  position: relative;
+}
+
+.auth-right-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--auth-bg-right);
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 .auth-right-inner {

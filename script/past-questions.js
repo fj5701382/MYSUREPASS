@@ -51,7 +51,6 @@ const prevPageButton = document.getElementById('prevPage');
 const nextPageButton = document.getElementById('nextPage');
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
-const themeToggle = document.querySelector('.theme-toggle');
 
 let currentPage = 1;
 
@@ -215,35 +214,12 @@ nextPageButton.addEventListener('click', () => {
   }
 });
 
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('is-open');
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-  document.body.classList.toggle('menu-open', isOpen);
-});
-
-function applyTheme(theme) {
-  document.body.setAttribute('data-theme', theme);
-  const isDark = theme === 'dark';
-  if (themeToggle) {
-    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    themeToggle.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-  }
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('is-open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('menu-open', isOpen);
+  });
 }
-
-const storedTheme = localStorage.getItem('mysurepass-theme');
-const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-applyTheme(storedTheme || (systemPrefersDark ? 'dark' : 'light'));
-
-themeToggle.addEventListener('click', () => {
-  const nextTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('mysurepass-theme', nextTheme);
-  applyTheme(nextTheme);
-});
-
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-  if (!localStorage.getItem('mysurepass-theme')) {
-    applyTheme(event.matches ? 'dark' : 'light');
-  }
-});
 
 updateView();
