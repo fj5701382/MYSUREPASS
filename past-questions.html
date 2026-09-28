@@ -1,18 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>MySurePass - past-questions</title>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/responsive.css">
-<link rel="stylesheet" href="style/pages-shared.css">
-<link rel="stylesheet" href="style/past-questions.css">
-</head>
-<body>
-<main>
-<h1>past-questions</h1>
-</main>
-<script src="script/pages-shared.js" defer></script>
-<script src="script/past-questions.js" defer></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>MySurePass — Past Questions Hub</title>
+    <meta name="description" content="Browse verified past examination questions from WAEC, JAMB, NECO, NABTEB and more on MySurePass. Search by subject, exam, year, and topic." />
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/responsive.css" />
+    <link rel="stylesheet" href="style/pages-shared.css" />
+    <link rel="stylesheet" href="style/past-questions.css" />
+  </head>
+  <body>
+    <header class="navbar" id="navbar">
+      <div class="navbar-inner">
+        <a href="index.html" class="logo" aria-label="MySurePass home">
+          <img src="assets/images/logo.svg" alt="" class="logo-mark" width="28" height="28" />
+          <span>MySurePass</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="past-questions.html" aria-current="page" class="is-active">Past Questions</a>
+          <a href="subjects.html">Subjects</a>
+          <a href="cbt-practice.html">CBT Practice</a>
+          <a href="teachers.html">For Teachers</a>
+          <a href="api.html">API</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+            <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 0 1 11.2 3a9 9 0 1 0 9.8 9.8Z" fill="currentColor"/>
+            </svg>
+          </button>
+          <a href="login.html" class="nav-login">Log In</a>
+          <div class="user-avatar" aria-label="User account">AA</div>
+          <button class="hamburger" id="hamburger" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <nav aria-label="Mobile navigation">
+          <a href="index.html">Home</a>
+          <a href="past-questions.html" aria-current="page" class="is-active">Past Questions</a>
+          <a href="subjects.html">Subjects</a>
+          <a href="cbt-practice.html">CBT Practice</a>
+          <a href="teachers.html">For Teachers</a>
+          <a href="api.html">API</a>
+        </nav>
+        <div class="mobile-actions">
+          <a href="login.html" class="btn btn-secondary">Log In</a>
+          <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="hero-section">
+        <div class="container hero-inner">
+          <div class="hero-badge">INSTITUTIONAL EDTECH PLATFORM</div>
+          <h1>Past Questions Hub</h1>
+          <p>
+            Access thousands of past examination questions organized by exam, subject, year,
+            and topic. Study smarter with verified questions and detailed solutions.
+          </p>
+        </div>
+      </section>
+
+      <section class="search-section" aria-labelledby="search-heading">
+        <div class="container">
+          <form class="search-panel" id="questionSearchForm" novalidate>
+            <label class="search-input-shell" for="searchInput">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="search-icon">
+                <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M16 16L21 21" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/>
+              </svg>
+              <input id="searchInput" name="searchInput" type="search" placeholder="Search questions by keyword, topic, or question number..." aria-label="Search questions by keyword, topic, or question number" />
+            </label>
+
+            <div class="filter-grid" aria-label="Question filters">
+              <div class="filter-field">
+                <label for="examFilter">Examination</label>
+                <select id="examFilter" name="examFilter">
+                  <option value="All Examinations">All Examinations</option>
+                  <option value="WAEC">WAEC</option>
+                  <option value="JAMB">JAMB</option>
+                  <option value="NECO">NECO</option>
+                  <option value="NABTEB">NABTEB</option>
+                  <option value="BECE / JCE">BECE / JCE</option>
+                </select>
+              </div>
+
+              <div class="filter-field">
+                <label for="subjectFilter">Subject</label>
+                <select id="subjectFilter" name="subjectFilter">
+                  <option value="All Subjects">All Subjects</option>
+                  <option value="Mathematics">Mathematics</option>
+                  <option value="English Language">English Language</option>
+                  <option value="Physics">Physics</option>
+                  <option value="Chemistry">Chemistry</option>
+                  <option value="Biology">Biology</option>
+                  <option value="Further Mathematics">Further Mathematics</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Government">Government</option>
+                  <option value="Literature">Literature</option>
+                  <option value="Computer Studies">Computer Studies</option>
+                </select>
+              </div>
+
+              <div class="filter-field">
+                <label for="yearFilter">Year</label>
+                <select id="yearFilter" name="yearFilter">
+                  <option value="All Years">All Years</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                </select>
+              </div>
+
+              <div class="filter-field">
+                <label for="topicFilter">Topic</label>
+                <select id="topicFilter" name="topicFilter">
+                  <option value="All Topics">All Topics</option>
+                  <option value="Algebra">Algebra</option>
+                  <option value="Comprehension">Comprehension</option>
+                  <option value="Mechanics">Mechanics</option>
+                  <option value="Organic Chemistry">Organic Chemistry</option>
+                  <option value="Ecology">Ecology</option>
+                  <option value="Trigonometry">Trigonometry</option>
+                  <option value="Electrochemistry">Electrochemistry</option>
+                  <option value="Complex Numbers">Complex Numbers</option>
+                  <option value="Heat">Heat</option>
+                  <option value="Cell Biology">Cell Biology</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="search-actions">
+              <button class="search-button" type="submit">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <path d="M16 16L21 21" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/>
+                </svg>
+                Search
+              </button>
+            </div>
+          </form>
+
+          <div class="results-status" id="resultsStatus" aria-live="polite"></div>
+          <div id="questionGrid" class="question-grid" aria-live="polite"></div>
+
+          <div id="emptyState" class="empty-state" hidden>
+            <h2>No matching questions found.</h2>
+            <p>Try changing your examination, subject, year, topic, or search keyword.</p>
+            <button type="button" class="clear-filters-btn" id="clearFilters">Clear Filters</button>
+          </div>
+
+          <nav class="pagination" aria-label="Question pages">
+            <button type="button" class="page-btn page-prev" id="prevPage" aria-label="Previous page">&lt;</button>
+            <div id="paginationNumbers" class="pagination-numbers" aria-label="Page numbers"></div>
+            <button type="button" class="page-btn page-next" id="nextPage" aria-label="Next page">&gt;</button>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo" aria-label="MySurePass home">
+            <img src="assets/images/logo.svg" alt="" width="34" height="34" />
+            <span>MySurePass</span>
+          </a>
+          <p>
+            Nigeria's trusted EdTech platform providing high-quality CBT testing tools, verified
+            historical past papers, and comprehensive analytics for schools and individuals.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>EXAMS</h3>
+          <ul>
+            <li><a href="past-questions.html">WAEC Practice</a></li>
+            <li><a href="past-questions.html">JAMB Prep</a></li>
+            <li><a href="past-questions.html">NECO Exams</a></li>
+            <li><a href="past-questions.html">BECE/JCE</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>PLATFORM</h3>
+          <ul>
+            <li><a href="past-questions.html">Past Questions</a></li>
+            <li><a href="subjects.html">Subjects</a></li>
+            <li><a href="api.html">Schools API</a></li>
+            <li><a href="index.html">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>COMPANY</h3>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="support.html">Contact Support</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span>© 2026 MySurePass EdTech. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <script src="script/pages-shared.js" defer></script>
+    <script src="script/past-questions.js" defer></script>
+  </body>
 </html>
