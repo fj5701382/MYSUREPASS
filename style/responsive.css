@@ -247,3 +247,78 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ============================================================
+   FOOTER RESPONSIVE — PREMIUM
+   ============================================================ */
+
+/* Tablet: stack brand + 2-col nav */
+@media (max-width: 1024px) {
+  .footer-upper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer-nav {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .footer-cta-strip {
+    padding: 28px 32px;
+  }
+}
+
+/* Large phone: CTA stacks, nav 2 cols */
+@media (max-width: 768px) {
+  .footer-cta-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .footer-cta-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+/* Small phone */
+@media (max-width: 480px) {
+  .footer {
+    margin-top: 56px;
+  }
+
+  .footer-body {
+    padding-top: 48px;
+  }
+
+  .footer-nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 36px;
+  }
+
+  .footer-legal {
+    gap: 16px;
+  }
+}
+
+/* Tiny */
+@media (max-width: 360px) {
+  .footer-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-badge-row {
+    gap: 6px;
+  }
+}
+
