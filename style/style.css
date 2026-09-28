@@ -454,102 +454,208 @@ body {
 }
 
 /* ============================================================
-   FOOTER — PREMIUM REDESIGN
+   FOOTER — CRAZY PREMIUM
    ============================================================ */
 
+/* --- Base shell --- */
 .footer {
   position: relative;
-  background: linear-gradient(160deg, #05112b 0%, #071630 40%, #061226 100%);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 120%, rgba(37,99,235,0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% -20%, rgba(60,196,141,0.15) 0%, transparent 50%),
+    linear-gradient(170deg, #04101f 0%, #060f20 35%, #050c1a 65%, #03080f 100%);
   color: #fff;
   margin-top: 96px;
   overflow: hidden;
 }
 
-/* Subtle dot-grid texture */
-.footer::before {
-  content: "";
+/* --- Film-grain noise overlay via SVG data URI --- */
+.footer-noise {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px);
-  background-size: 28px 28px;
+  z-index: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
   pointer-events: none;
 }
 
-/* Ambient glow blob top-right */
-.footer::after {
-  content: "";
+/* --- Giant watermark text --- */
+.footer-watermark {
   position: absolute;
-  top: -120px;
-  right: -80px;
-  width: 520px;
-  height: 420px;
-  background: radial-gradient(ellipse at center, rgba(11,69,196,0.22) 0%, transparent 70%);
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: clamp(80px, 14vw, 200px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  white-space: nowrap;
   pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  animation: watermark-drift 18s ease-in-out infinite alternate;
 }
 
-/* ── Glowing top accent bar ── */
+@keyframes watermark-drift {
+  0%   { transform: translateX(-50%) translateY(0px); }
+  100% { transform: translateX(-50%) translateY(-14px); }
+}
+
+/* --- Floating geometric rings --- */
+.footer-rings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.f-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.055);
+  animation: ring-float linear infinite;
+}
+
+.f-ring-1 {
+  width: 380px; height: 380px;
+  top: -100px; left: -80px;
+  border-color: rgba(37,99,235,0.18);
+  border-width: 1.5px;
+  animation-duration: 22s;
+  animation-name: ring-float;
+}
+
+.f-ring-2 {
+  width: 260px; height: 260px;
+  top: 40px; right: 10%;
+  border-color: rgba(60,196,141,0.14);
+  animation-duration: 17s;
+  animation-delay: -6s;
+  animation-name: ring-float-b;
+}
+
+.f-ring-3 {
+  width: 160px; height: 160px;
+  bottom: 80px; left: 30%;
+  border-color: rgba(255,255,255,0.06);
+  animation-duration: 13s;
+  animation-delay: -3s;
+  animation-name: ring-float;
+}
+
+.f-ring-4 {
+  width: 480px; height: 480px;
+  bottom: -160px; right: -100px;
+  border-color: rgba(37,99,235,0.1);
+  animation-duration: 28s;
+  animation-delay: -10s;
+  animation-name: ring-float-b;
+}
+
+@keyframes ring-float {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-22px) rotate(8deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes ring-float-b {
+  0%   { transform: translateY(0px) rotate(0deg) scale(1); }
+  50%  { transform: translateY(18px) rotate(-6deg) scale(1.04); }
+  100% { transform: translateY(0px) rotate(0deg) scale(1); }
+}
+
+/* --- Shimmer accent bar --- */
 .footer-glow-bar {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   height: 3px;
   background: linear-gradient(90deg,
     transparent 0%,
-    #2563eb 20%,
-    #3cc48d 50%,
-    #2563eb 80%,
+    #1d4ed8 15%,
+    #60a5fa 35%,
+    #34d399 50%,
+    #60a5fa 65%,
+    #1d4ed8 85%,
     transparent 100%);
-  background-size: 200% 100%;
-  animation: footer-shimmer 4s linear infinite;
+  background-size: 300% 100%;
+  animation: footer-shimmer 3.5s linear infinite;
+  box-shadow: 0 0 18px 2px rgba(37,99,235,0.5), 0 0 4px rgba(52,211,153,0.4);
 }
 
 @keyframes footer-shimmer {
-  0%   { background-position: 200% center; }
-  100% { background-position: -200% center; }
+  0%   { background-position: 300% center; }
+  100% { background-position: -300% center; }
 }
 
-/* ── Body wrapper ── */
+/* --- Body wrapper --- */
 .footer-body {
   position: relative;
   z-index: 1;
-  padding: 72px 0 0;
+  padding: 80px 0 0;
 }
 
-/* ── Upper: brand + nav ── */
+/* --- Upper grid: brand + nav --- */
 .footer-upper {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 280px 1fr;
   gap: 80px;
-  padding-bottom: 64px;
+  padding-bottom: 72px;
 }
 
-/* ── Brand block ── */
+/* --- Brand block --- */
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .footer-logo {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: #fff;
-  letter-spacing: -0.02em;
+  gap: 14px;
+  text-decoration: none;
 }
 
 .footer-logo img {
-  border-radius: 10px;
-  background: rgba(255,255,255,0.08);
-  padding: 2px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.07);
+  padding: 3px;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
 }
 
+.footer-logo:hover img {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+/* Space Grotesk gradient-shimmer brand name */
+.footer-logo-text {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  background: linear-gradient(90deg,
+    #fff 0%, #93c5fd 35%, #6ee7b7 55%, #fff 80%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: logo-shimmer 5s linear infinite;
+}
+
+@keyframes logo-shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 250% center; }
+}
+
+/* Footer tagline */
 .footer-tagline {
-  font-size: 0.92rem;
-  color: rgba(255,255,255,0.52);
-  line-height: 1.7;
-  max-width: 260px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.75;
 }
 
 /* Exam badge pills */
@@ -557,23 +663,31 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 4px;
 }
 
 .footer-badge {
   display: inline-flex;
   align-items: center;
-  padding: 5px 11px;
+  padding: 5px 13px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
-  font-size: 0.72rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.055);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.55);
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
 }
 
-/* ── Nav columns ── */
+.footer-badge:hover {
+  border-color: rgba(96,165,250,0.5);
+  color: #93c5fd;
+  background: rgba(37,99,235,0.12);
+  transform: translateY(-1px);
+}
+
+/* --- Nav columns --- */
 .footer-nav {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -581,30 +695,57 @@ body {
 }
 
 .footer-col-label {
-  font-size: 0.72rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 20px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.28);
+  margin-bottom: 22px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+/* Accent underline on col heading */
+.footer-col-label::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 1.5px;
+  background: linear-gradient(90deg, #3b82f6, #34d399);
+  border-radius: 2px;
 }
 
 .footer-col ul {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 15px;
 }
 
 .footer-col ul li a {
   position: relative;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.62);
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
   line-height: 1.4;
-  transition: color 0.2s ease;
+  transition: color 0.22s ease, padding-left 0.22s ease;
   padding-bottom: 2px;
+  display: inline-block;
 }
 
-/* Animated gradient underline on hover */
+/* Left-nudge and underline on hover */
+.footer-col ul li a::before {
+  content: "→";
+  position: absolute;
+  left: -18px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+  font-size: 0.8rem;
+  color: #34d399;
+}
+
 .footer-col ul li a::after {
   content: "";
   position: absolute;
@@ -612,97 +753,190 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: linear-gradient(90deg, #3cc48d, #2563eb);
-  transition: width 0.28s ease;
+  background: linear-gradient(90deg, #34d399, #60a5fa);
+  transition: width 0.3s cubic-bezier(0.22,1,0.36,1);
 }
 
 .footer-col ul li a:hover {
   color: #fff;
+  padding-left: 22px;
+}
+
+.footer-col ul li a:hover::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .footer-col ul li a:hover::after {
-  width: 100%;
+  width: calc(100% - 22px);
 }
 
-/* ── CTA Strip (glassmorphism card) ── */
+/* --- CTA Strip --- */
 .footer-cta-strip {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  background: linear-gradient(135deg, rgba(37,99,235,0.16) 0%, rgba(60,196,141,0.10) 100%);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 20px;
-  padding: 36px 48px;
-  margin-bottom: 52px;
+  gap: 36px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(52,211,153,0.12) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 40px 52px;
+  margin-bottom: 56px;
+  isolation: isolate;
+}
+
+/* Moving light sweep inside CTA strip */
+.footer-cta-strip::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: cta-sweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cta-sweep {
+  0%   { left: -100%; }
+  60%  { left: 150%; }
+  100% { left: 150%; }
 }
 
 .footer-cta-text {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  flex: 1;
 }
 
 .footer-cta-heading {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
   font-weight: 700;
   color: #fff;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
 }
 
 .footer-cta-sub {
-  font-size: 0.92rem;
-  color: rgba(255,255,255,0.52);
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
 }
 
-.footer-cta-btn {
+/* CTA action group */
+.footer-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   flex-shrink: 0;
+}
+
+/* Primary CTA button */
+.footer-cta-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ecb 100%);
+  gap: 12px;
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   color: #fff;
   border: none;
-  padding: 15px 32px;
-  border-radius: 12px;
+  padding: 16px 34px;
+  border-radius: 14px;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
-  box-shadow: 0 8px 32px rgba(37,99,235,0.45), inset 0 0 0 1px rgba(255,255,255,0.1);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  white-space: nowrap;
+  letter-spacing: -0.01em;
   text-decoration: none;
+  box-shadow:
+    0 0 0 0 rgba(37,99,235,0.6),
+    0 8px 32px rgba(37,99,235,0.5);
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease;
+  white-space: nowrap;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Pulsing glow rings on CTA btn */
+.footer-cta-btn::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  border: 2px solid rgba(96,165,250,0.5);
+  animation: pulse-ring 2s cubic-bezier(0,0,0.2,1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-ring {
+  0%   { opacity: 1; transform: scale(1); }
+  70%  { opacity: 0; transform: scale(1.25); }
+  100% { opacity: 0; transform: scale(1.25); }
 }
 
 .footer-cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 44px rgba(37,99,235,0.6), inset 0 0 0 1px rgba(255,255,255,0.15);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 0 0 0 rgba(37,99,235,0),
+    0 20px 50px rgba(37,99,235,0.65);
 }
 
-.footer-cta-btn:active {
-  transform: translateY(0);
+.footer-cta-btn:hover::before {
+  animation-play-state: paused;
 }
 
-/* ── Divider ── */
+.footer-cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.footer-cta-btn:hover .footer-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Ghost secondary link */
+.footer-cta-ghost {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+  border-bottom: 1px dashed rgba(255,255,255,0.2);
+  padding-bottom: 2px;
+}
+
+.footer-cta-ghost:hover {
+  color: rgba(255,255,255,0.9);
+  border-bottom-color: rgba(255,255,255,0.6);
+}
+
+/* --- Divider --- */
 .footer-divider {
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.06);
   margin: 0;
 }
 
-/* ── Bottom bar ── */
+/* --- Bottom bar --- */
 .footer-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
-  padding: 24px 0 40px;
+  padding: 24px 0 44px;
 }
 
 .footer-copy {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.28);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.01em;
 }
 
 .footer-legal {
@@ -713,11 +947,26 @@ body {
 }
 
 .footer-legal a {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.36);
-  transition: color 0.18s ease;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  transition: color 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
 .footer-legal a:hover {
-  color: rgba(255,255,255,0.82);
+  color: rgba(255,255,255,0.8);
 }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .footer-watermark,
+  .f-ring,
+  .footer-glow-bar,
+  .footer-logo-text,
+  .footer-cta-strip::before,
+  .footer-cta-btn::before {
+    animation: none;
+  }
+}
+
+

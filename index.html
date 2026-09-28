@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style/style.css">
 <link rel="stylesheet" href="style/responsive.css">
 <link rel="stylesheet" href="style/index.css">
@@ -215,22 +215,38 @@
 
 <footer class="footer" role="contentinfo">
 
-  <!-- Top glow accent bar -->
+  <!-- ░░ DECORATIVE LAYERS (aria-hidden) ░░ -->
+  <!-- Film-grain noise overlay -->
+  <div class="footer-noise" aria-hidden="true"></div>
+
+  <!-- Giant watermark text -->
+  <div class="footer-watermark" aria-hidden="true">MySurePass</div>
+
+  <!-- Floating geometric ring shapes -->
+  <div class="footer-rings" aria-hidden="true">
+    <div class="f-ring f-ring-1"></div>
+    <div class="f-ring f-ring-2"></div>
+    <div class="f-ring f-ring-3"></div>
+    <div class="f-ring f-ring-4"></div>
+  </div>
+
+  <!-- Shimmer accent bar -->
   <div class="footer-glow-bar" aria-hidden="true"></div>
 
+  <!-- ░░ REAL CONTENT ░░ -->
   <div class="footer-body">
     <div class="container">
 
-      <!-- === UPPER SECTION === -->
+      <!-- === UPPER === -->
       <div class="footer-upper">
 
-        <!-- Brand block -->
+        <!-- Brand -->
         <div class="footer-brand">
           <a href="index.html" class="footer-logo" aria-label="MySurePass home">
-            <img src="assets/images/logo.svg" alt="" width="36" height="36">
-            <span>MySurePass</span>
+            <img src="assets/images/logo.svg" alt="" width="40" height="40">
+            <span class="footer-logo-text">MySurePass</span>
           </a>
-          <p class="footer-tagline">Nigeria's premier digital question vault. Practice smarter. Pass confidently.</p>
+          <p class="footer-tagline">Nigeria's premier digital question vault.<br>Practice smarter. Pass confidently.</p>
           <div class="footer-badge-row" aria-label="Supported examinations">
             <span class="footer-badge">WAEC</span>
             <span class="footer-badge">JAMB</span>
@@ -240,7 +256,7 @@
           </div>
         </div>
 
-        <!-- Link columns -->
+        <!-- Link nav -->
         <nav class="footer-nav" aria-label="Footer navigation">
           <div class="footer-col">
             <p class="footer-col-label">Past Questions</p>
@@ -286,23 +302,28 @@
       <div class="footer-cta-strip">
         <div class="footer-cta-text">
           <p class="footer-cta-heading">Ready to ace your next exam?</p>
-          <p class="footer-cta-sub">Join thousands of Nigerian students already practicing on MySurePass.</p>
+          <p class="footer-cta-sub">Join thousands of Nigerian students already practicing on MySurePass — free.</p>
         </div>
-        <a href="register.html" class="btn footer-cta-btn">
-          Create Free Account
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="footer-cta-actions">
+          <a href="register.html" class="footer-cta-btn">
+            <span>Create Free Account</span>
+            <span class="footer-cta-arrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+          <a href="past-questions.html" class="footer-cta-ghost">Browse Questions</a>
+        </div>
       </div>
 
       <!-- === DIVIDER === -->
       <hr class="footer-divider">
 
-      <!-- === BOTTOM BAR === -->
+      <!-- === BOTTOM === -->
       <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2025 MySurePass. All rights reserved. Built for Nigerian students.</p>
+        <p class="footer-copy">&copy; 2025 MySurePass &mdash; Built for Nigerian students.</p>
         <nav class="footer-legal" aria-label="Legal links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
           <a href="support.html">Support</a>
         </nav>
       </div>
