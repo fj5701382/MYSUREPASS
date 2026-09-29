@@ -1,8 +1,7 @@
 /* ============================================================
-   About Us — MySurePass
+   About Us — MySurePass  ·  CINEMATIC IMAGE EDITION
    ============================================================ */
 
-/* ── Shared page variables ─────────────────────────────────── */
 :root {
   --footer-bg: #071a33;
   --footer-text: #dfe8f5;
@@ -12,75 +11,109 @@
   --green-brand-soft: #e5f6ef;
 }
 
-/* ── Reset helpers ─────────────────────────────────────────── */
 body { background: var(--background); }
 
-/* ── HERO ──────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   HERO — Full-bleed VR classroom background + dark overlay
+   Uses: student-vr.jpg (VR students in class)
+   ══════════════════════════════════════════════════════════════ */
 .about-hero {
-  background: linear-gradient(170deg, #071a33 0%, #0d2345 55%, #071a33 100%);
-  color: #fff;
-  padding: 80px 0 72px;
   position: relative;
+  min-height: 540px;
+  padding: 100px 0 88px;
+  display: flex;
+  align-items: center;
   overflow: hidden;
+  color: #fff;
 }
 
+/* ── Photo layer ── */
 .about-hero::before {
   content: '';
   position: absolute;
   inset: 0;
+  background-image: url('../image/student-login\ 1.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  transform: scale(1.04);
+  animation: hero-slow-zoom 18s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes hero-slow-zoom {
+  0%   { transform: scale(1.04) translateY(0px); }
+  100% { transform: scale(1.10) translateY(-12px); }
+}
+
+/* ── Multi-layer gradient overlay ── */
+.about-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 80% 20%, rgba(30,166,122,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 10% 80%, rgba(37,99,235,0.15) 0%, transparent 50%);
-  pointer-events: none;
+    linear-gradient(to right,
+      rgba(4,15,35,0.97) 0%,
+      rgba(7,26,51,0.82) 45%,
+      rgba(7,26,51,0.45) 70%,
+      rgba(7,26,51,0.2) 100%),
+    linear-gradient(to top, rgba(4,15,35,0.8) 0%, transparent 40%);
+  z-index: 1;
 }
 
 .about-hero-inner {
   position: relative;
-  z-index: 1;
-  text-align: center;
+  z-index: 2;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  align-items: flex-start;
+  gap: 22px;
+  max-width: 680px;
 }
 
 .eyebrow-pill {
   display: inline-flex;
   align-items: center;
-  padding: 6px 18px;
+  padding: 7px 20px;
   border-radius: 999px;
-  background: rgba(30,166,122,0.18);
-  border: 1px solid rgba(30,166,122,0.35);
+  background: rgba(30,166,122,0.22);
+  border: 1px solid rgba(52,211,153,0.45);
   color: #34d399;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
+  backdrop-filter: blur(6px);
 }
 
 .about-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  line-height: 1.08;
+  letter-spacing: -0.05em;
   color: #fff;
-  max-width: 760px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.4);
 }
 
 .about-hero-sub {
   font-size: 1.05rem;
-  color: rgba(255,255,255,0.62);
-  max-width: 640px;
-  line-height: 1.7;
+  color: rgba(255,255,255,0.72);
+  max-width: 560px;
+  line-height: 1.75;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
 }
 
-/* ── GENERIC SECTION ───────────────────────────────────────── */
-.about-section {
-  padding: 72px 0;
-}
+/* ══════════════════════════════════════════════════════════════
+   MISSION & VISION — Split layout with floating portrait
+   Uses: professional_avatar (Amina portrait) as decorative right panel
+   ══════════════════════════════════════════════════════════════ */
+.about-section { padding: 72px 0; }
 
-/* ── MISSION & VISION ──────────────────────────────────────── */
-.mv-section { background: var(--background); }
+.mv-section {
+  background: var(--background);
+  overflow: hidden;
+}
 
 .mv-grid {
   display: grid;
@@ -97,23 +130,42 @@ body { background: var(--background); }
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.25s, transform 0.25s;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle photo texture in Mission card background */
+.mv-card:first-child::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  width: 180px;
+  height: 180px;
+  background-image: url('../image/realistic_high_quality_photograph_of_an_inspiring_nigerian_young_female_student.png');
+  background-size: cover;
+  background-position: center top;
+  border-radius: 50%;
+  opacity: 0.07;
+  pointer-events: none;
 }
 
 .mv-card:hover {
-  box-shadow: 0 12px 32px rgba(15,27,60,0.1);
-  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(15,27,60,0.13);
+  transform: translateY(-4px);
 }
 
 .mv-icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   background: var(--blue-bg);
   color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .mv-icon-green {
@@ -122,25 +174,103 @@ body { background: var(--background); }
 }
 
 .mv-label {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--navy);
   letter-spacing: -0.02em;
 }
 
-.mv-card p {
-  color: var(--muted);
-  line-height: 1.7;
+.mv-card p { color: var(--muted); line-height: 1.75; }
+
+/* ══════════════════════════════════════════════════════════════
+   WHAT WE OFFER — Dark photo panel behind heading
+   Uses: high_quality_authentic (group study) as full-bleed bg
+   ══════════════════════════════════════════════════════════════ */
+.offer-section {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
 }
 
-/* ── WHAT WE OFFER ─────────────────────────────────────────── */
-.offer-section { background: #f3f6ff; }
+/* Photo banner at the top of the section */
+.offer-photo-banner {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.offer-photo-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../image/high_quality_authentic_photograph_of_cheerful_focused_young_adult_nigerian.png');
+  background-size: cover;
+  background-position: center 45%;
+  z-index: 0;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+.offer-photo-banner:hover::before { transform: scale(1.0); }
+
+.offer-photo-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(7,26,51,0.55) 0%,
+      rgba(7,26,51,0.72) 60%,
+      #f3f6ff 100%);
+  z-index: 1;
+}
+
+.offer-banner-text {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  color: #fff;
+  padding: 0 32px;
+}
+
+.offer-banner-text .eyebrow {
+  color: #34d399;
+  margin-bottom: 0;
+}
+
+.offer-banner-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.35);
+}
+
+.offer-banner-sub {
+  font-size: 0.97rem;
+  color: rgba(255,255,255,0.72);
+  max-width: 580px;
+}
+
+/* Grid below the banner */
+.offer-grid-wrap {
+  background: #f3f6ff;
+  padding: 52px 0 72px;
+}
 
 .offer-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 .offer-card {
@@ -151,18 +281,35 @@ body { background: var(--background); }
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.22s, transform 0.22s;
+  position: relative;
+  overflow: hidden;
 }
 
+.offer-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--green-brand));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+
+.offer-card:hover::before { transform: scaleX(1); }
+
 .offer-card:hover {
-  box-shadow: 0 10px 28px rgba(15,27,60,0.09);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(15,27,60,0.1);
+  transform: translateY(-3px);
 }
 
 .offer-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,50 +318,56 @@ body { background: var(--background); }
 .offer-icon-blue { background: var(--blue-bg); color: var(--primary); }
 .offer-icon-green { background: var(--green-brand-soft); color: var(--green-brand); }
 
-.offer-card h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--navy);
+.offer-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+.offer-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.68; }
+
+/* ══════════════════════════════════════════════════════════════
+   OUR STORY — Left text, Right image as cinematic clip
+   Uses: realistic_high_quality (student at laptop in library)
+   ══════════════════════════════════════════════════════════════ */
+.story-section {
+  background: var(--background);
+  padding: 0;
+  overflow: hidden;
 }
-
-.offer-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
-
-/* ── OUR STORY ─────────────────────────────────────────────── */
-.story-section { background: var(--background); }
 
 .story-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
+  min-height: 520px;
 }
 
+/* Left: content */
 .story-content {
+  padding: 80px 64px 80px 32px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-content: center;
+  gap: 18px;
 }
 
 .story-content p {
   color: var(--muted);
-  line-height: 1.75;
+  line-height: 1.78;
 }
 
+/* Stats row inside story */
 .story-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
+  margin-top: 8px;
 }
 
 .stat-card {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 28px 22px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  gap: 5px;
+  transition: box-shadow 0.22s, transform 0.22s;
 }
 
 .stat-card:hover {
@@ -232,19 +385,162 @@ body { background: var(--background); }
 }
 
 .stat-label {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   color: var(--muted);
   font-weight: 500;
 }
 
-/* ── MEET THE TEAM ─────────────────────────────────────────── */
-.team-section { background: #f3f6ff; }
+/* Right: photo panel */
+.story-image-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.story-image-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../image/realistic_high_quality_photograph_of_an_inspiring_nigerian_young_female_student.png');
+  background-size: cover;
+  background-position: center center;
+  transition: transform 6s ease;
+}
+
+.story-image-panel:hover::before { transform: scale(1.04); }
+
+/* Dark overlay from left to show text contrast on edge */
+.story-image-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(246,248,255,0.3) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(7,26,51,0.1) 0%, rgba(7,26,51,0.3) 100%);
+}
+
+/* Floating badge on photo */
+.story-float-badge {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: rgba(7,26,51,0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.story-float-badge .badge-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(30,166,122,0.25);
+  border: 1px solid rgba(52,211,153,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #34d399;
+  flex-shrink: 0;
+}
+
+.story-float-badge .badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.story-float-badge .badge-big {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.story-float-badge .badge-small {
+  font-size: 0.74rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MEET THE TEAM — photo bg strip above cards
+   Uses: high_quality_authentic (group study photo) as banner bg
+   ══════════════════════════════════════════════════════════════ */
+.team-section {
+  padding: 0;
+  background: #f3f6ff;
+  overflow: hidden;
+}
+
+.team-header-banner {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.team-header-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../image/high_quality_authentic_photograph_of_cheerful_focused_young_adult_nigerian.png');
+  background-size: cover;
+  background-position: center 25%;
+  z-index: 0;
+  filter: blur(2px) brightness(0.55);
+}
+
+.team-header-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(7,26,51,0.4) 0%, rgba(7,26,51,0.75) 100%),
+    linear-gradient(to bottom, transparent 30%, #f3f6ff 100%);
+  z-index: 1;
+}
+
+.team-header-text {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 0 32px;
+}
+
+.team-header-text .eyebrow { color: #34d399; margin-bottom: 0; }
+
+.team-header-text .section-title { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+
+.team-cards-wrap {
+  padding: 0 0 72px;
+}
+
+.team-sub {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 28px auto 36px;
+  line-height: 1.65;
+}
 
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
-  margin-top: 12px;
 }
 
 .team-card {
@@ -254,46 +550,56 @@ body { background: var(--background); }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s, transform 0.25s;
 }
 
 .team-card:hover {
-  box-shadow: 0 14px 36px rgba(15,27,60,0.11);
-  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(15,27,60,0.14);
+  transform: translateY(-5px);
 }
 
 .team-img-wrap {
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
+  position: relative;
   background: var(--blue-bg);
 }
+
+/* Green gradient shimmer over photo on hover */
+.team-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(30,166,122,0.22), rgba(37,99,235,0.18));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.team-card:hover .team-img-wrap::after { opacity: 1; }
 
 .team-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  transition: transform 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
 }
 
-.team-card:hover .team-img-wrap img { transform: scale(1.04); }
+.team-card:hover .team-img-wrap img { transform: scale(1.07); }
 
 .team-info {
-  padding: 22px 20px 24px;
+  padding: 22px 20px 26px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
-.team-info h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--navy);
-}
+.team-info h3 { font-size: 1rem; font-weight: 700; color: var(--navy); }
 
 .team-role {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--green-brand);
   text-transform: uppercase;
@@ -301,25 +607,26 @@ body { background: var(--background); }
 }
 
 .team-info p {
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   color: var(--muted);
-  line-height: 1.6;
-  margin-top: 4px;
+  line-height: 1.62;
+  margin-top: 5px;
 }
 
-/* ── TRUSTED BY ────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   TRUSTED BY SCHOOLS
+   ══════════════════════════════════════════════════════════════ */
 .trusted-section {
   padding: 52px 0;
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   background: var(--background);
 }
 
 .trusted-label {
   text-align: center;
-  font-size: 0.72rem;
+  font-size: 0.71rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
   color: var(--muted);
   margin-bottom: 28px;
   text-transform: uppercase;
@@ -330,7 +637,7 @@ body { background: var(--background); }
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 32px 48px;
+  gap: 28px 52px;
 }
 
 .trusted-school {
@@ -338,43 +645,88 @@ body { background: var(--background); }
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--muted);
-  opacity: 0.65;
-  transition: opacity 0.2s;
+  opacity: 0.6;
+  transition: opacity 0.2s, color 0.2s;
   white-space: nowrap;
+  cursor: default;
 }
 
-.trusted-school:hover { opacity: 1; }
+.trusted-school:hover { opacity: 1; color: var(--primary); }
 
-/* ── CTA ───────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   CTA — Full-bleed photo with glassmorphism card on top
+   Uses: student-vr.jpg as background
+   ══════════════════════════════════════════════════════════════ */
 .about-cta-section {
-  padding: 64px 0 80px;
-  background: #f3f6ff;
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.about-cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../image/student-login\ 1.jpg');
+  background-size: cover;
+  background-position: center 20%;
+  z-index: 0;
+  transform: scale(1.03);
+  animation: cta-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes cta-drift {
+  0%   { transform: scale(1.03) translateX(0px); }
+  100% { transform: scale(1.07) translateX(-12px); }
+}
+
+.about-cta-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(7,26,51,0.8) 0%, rgba(4,15,35,0.92) 100%);
+  z-index: 1;
 }
 
 .about-cta-card {
+  position: relative;
+  z-index: 2;
   max-width: 680px;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 28px;
+  padding: 56px 48px;
+  box-shadow: 0 24px 72px rgba(0,0,0,0.35);
+}
+
+.about-cta-card .eyebrow {
+  color: #34d399;
 }
 
 .about-cta-heading {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
   font-weight: 700;
-  color: var(--navy);
+  color: #fff;
   letter-spacing: -0.04em;
   line-height: 1.1;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.25);
 }
 
 .about-cta-sub {
-  color: var(--muted);
+  color: rgba(255,255,255,0.65);
   font-size: 1rem;
-  line-height: 1.65;
-  max-width: 520px;
+  line-height: 1.68;
+  max-width: 480px;
 }
 
 .about-cta-btns {
@@ -383,10 +735,23 @@ body { background: var(--background); }
   gap: 14px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
-/* ── FOOTER ────────────────────────────────────────────────── */
+.about-cta-btns .btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.25);
+}
+
+.about-cta-btns .btn-secondary:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════════════ */
 .site-footer {
   background: var(--footer-bg);
   color: var(--footer-text);
@@ -400,11 +765,7 @@ body { background: var(--background); }
   padding-bottom: 48px;
 }
 
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
 
 .footer-logo {
   display: inline-flex;
@@ -428,10 +789,7 @@ body { background: var(--background); }
   line-height: 1.7;
 }
 
-.footer-socials {
-  display: flex;
-  gap: 12px;
-}
+.footer-socials { display: flex; gap: 12px; }
 
 .footer-socials a {
   width: 34px;
@@ -494,51 +852,67 @@ body { background: var(--background); }
 
 .footer-location { font-size: 0.8rem; color: rgba(255,255,255,0.28); }
 
-/* ── RESPONSIVE ────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
+  .story-grid { grid-template-columns: 1fr; }
+  .story-image-panel { min-height: 360px; }
+  .story-content { padding: 60px 32px; }
+  .story-float-badge { width: calc(100% - 48px); justify-content: center; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-brand { grid-column: 1 / -1; }
 }
 
 @media (max-width: 900px) {
   .mv-grid { grid-template-columns: 1fr; }
-  .story-grid { grid-template-columns: 1fr; gap: 40px; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-hero-inner { align-items: center; text-align: center; }
+  .about-hero-inner .about-hero-sub { text-align: center; }
 }
 
 @media (max-width: 768px) {
-  .about-hero { padding: 60px 0 52px; }
+  .about-hero { min-height: 420px; padding: 72px 0 64px; }
   .about-section { padding: 52px 0; }
+  .offer-photo-banner { height: 200px; }
+  .team-header-banner { height: 160px; }
+  .about-cta-card { padding: 40px 28px; }
+  .about-cta-section { padding: 60px 0; }
   .offer-grid { grid-template-columns: 1fr; }
   .story-stats { grid-template-columns: 1fr 1fr; }
-  .team-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
-  .about-hero-title { font-size: clamp(1.75rem, 7vw, 2.6rem); }
-  .trusted-logos { gap: 20px 32px; }
+}
+
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
 }
 
 @media (max-width: 480px) {
-  .about-hero { padding: 48px 0 40px; }
-  .mv-card { padding: 24px 20px; }
+  .about-hero { padding: 56px 0 48px; }
+  .about-hero-title { font-size: clamp(1.75rem, 8vw, 2.4rem); }
+  .mv-card { padding: 24px 18px; }
   .offer-card { padding: 22px 18px; }
-  .stat-card { padding: 22px 18px; }
-  .story-stats { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .footer-brand { grid-column: 1 / -1; }
+  .stat-card { padding: 20px 16px; }
+  .story-content { padding: 44px 0; }
+  .story-float-badge { padding: 12px 16px; flex-direction: column; gap: 8px; text-align: center; white-space: normal; }
   .about-cta-btns { flex-direction: column; align-items: stretch; }
   .about-cta-btns .btn { width: 100%; justify-content: center; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mv-card, .offer-card, .stat-card, .team-card, .team-img-wrap img,
-  .footer-socials a { transition: none; }
+  .about-hero::before,
+  .about-cta-section::before { animation: none; }
+  .mv-card, .offer-card, .stat-card, .team-card,
+  .team-img-wrap img, .footer-socials a { transition: none; }
 }
 
 @media (prefers-color-scheme: dark) {
-  .offer-section, .team-section, .about-cta-section { background: #0d1527; }
-  .about-hero { background: linear-gradient(170deg, #040d1a 0%, #071428 55%, #040d1a 100%); }
-  .trusted-section { border-color: var(--border); background: var(--background); }
+  .offer-grid-wrap { background: #0d1527; }
+  .team-section { background: #0d1527; }
+  .trusted-section { background: var(--background); border-color: var(--border); }
+  .about-cta-section::after {
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(4,12,28,0.88) 0%, rgba(2,8,18,0.96) 100%);
+  }
 }
