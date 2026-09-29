@@ -1,3 +1,126 @@
+.hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: min(700px, calc(100svh - var(--nav-height)));
+  overflow: hidden;
+  isolation: isolate;
+  background-image:
+    linear-gradient(90deg, rgba(4, 19, 29, 0.94) 0%, rgba(4, 19, 29, 0.78) 46%, rgba(4, 19, 29, 0.24) 100%),
+    linear-gradient(0deg, rgba(4, 19, 29, 0.45), transparent 48%),
+    url("../assets/images/student-vr.jpg");
+  background-position: center, center, 58% 42%;
+  background-size: cover;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero-content {
+  padding-block: 72px;
+}
+
+.hero-title {
+  color: #fff;
+}
+
+.hero-sub,
+.hero-badges {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.hero-title .accent {
+  color: #71e3b7;
+}
+
+.hero-badges svg {
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.35));
+}
+
+#exam-coverage {
+  --coverage-wash: linear-gradient(rgba(249, 250, 246, 0.88), rgba(249, 250, 246, 0.94));
+  background-image:
+    var(--coverage-wash),
+    url("../assets/images/team-student.png"),
+    url("../assets/images/educational-bg.jpg");
+  background-position: center, right 5vw center, center;
+  background-size: cover, auto 100%, cover;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+
+.section-tint {
+  background-image:
+    linear-gradient(100deg, rgba(5, 24, 34, 0.9), rgba(5, 24, 34, 0.74)),
+    url("../assets/images/team-study.png");
+  background-position: center, center 48%;
+  background-size: cover;
+}
+
+#search .eyebrow {
+  color: #74e1b5;
+}
+
+#search .section-title {
+  color: #fff;
+}
+
+#search .section-sub {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+@media (prefers-color-scheme: dark) {
+  #exam-coverage {
+    --coverage-wash: linear-gradient(rgba(11, 19, 30, 0.86), rgba(11, 19, 30, 0.94));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 610px;
+    background-image:
+      linear-gradient(90deg, rgba(4, 19, 29, 0.88), rgba(4, 19, 29, 0.56)),
+      linear-gradient(0deg, rgba(4, 19, 29, 0.52), transparent 55%),
+      url("../assets/images/student-vr.jpg");
+    background-position: center, center, 57% center;
+  }
+
+  .hero-content {
+    padding-block: 64px;
+  }
+
+  #exam-coverage {
+    background-position: center, right -110px center, center;
+    background-size: cover, auto 78%, cover;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 590px;
+    background-image:
+      linear-gradient(90deg, rgba(4, 19, 29, 0.82), rgba(4, 19, 29, 0.58)),
+      linear-gradient(0deg, rgba(4, 19, 29, 0.58), transparent 60%),
+      url("../assets/images/student-vr.jpg");
+    background-position: center, center, 55% center;
+  }
+
+  .hero-content {
+    padding-block: 48px;
+  }
+
+  #exam-coverage {
+    background-position: center, right -170px center, center;
+    background-size: cover, auto 68%, cover;
+  }
+
+  .section-tint {
+    background-position: center, 58% center;
+  }
+}
+
 .mobile-menu {
   display: none;
 }
