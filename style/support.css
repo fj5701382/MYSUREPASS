@@ -16,9 +16,17 @@ body { background: var(--background); }
 
 /* ── HERO ──────────────────────────────────────────────────── */
 .contact-hero {
-  background: linear-gradient(170deg, #071a33 0%, #0d2345 55%, #071a33 100%);
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 430px;
+  background-color: #071a33;
+  background-image: url('../assets/images/team-amina.png');
+  background-size: auto 160%;
+  background-position: 82% 35%;
+  background-repeat: no-repeat;
   color: #fff;
-  padding: 72px 0 60px;
+  padding: 84px 0 76px;
   position: relative;
   overflow: hidden;
 }
@@ -28,18 +36,22 @@ body { background: var(--background); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 80% 20%, rgba(30,166,122,0.12) 0%, transparent 60%),
+    linear-gradient(90deg, rgba(4,17,30,0.98) 0%, rgba(4,17,30,0.9) 42%, rgba(4,17,30,0.38) 100%),
+    linear-gradient(0deg, rgba(4,17,30,0.5), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 80% 20%, rgba(30,166,122,0.17) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 10% 80%, rgba(37,99,235,0.15) 0%, transparent 50%);
+  z-index: 0;
   pointer-events: none;
 }
 
 .contact-hero-inner {
   position: relative;
   z-index: 1;
-  text-align: center;
+  width: 100%;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 18px;
 }
 
@@ -58,16 +70,17 @@ body { background: var(--background); }
 
 .contact-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  max-width: 640px;
+  font-size: 3.7rem;
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.02;
   letter-spacing: -0.05em;
   color: #fff;
 }
 
 .contact-hero-sub {
   font-size: 1rem;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255,255,255,0.82);
   line-height: 1.7;
   max-width: 540px;
 }
@@ -75,13 +88,18 @@ body { background: var(--background); }
 /* ── MAIN TWO-COLUMN LAYOUT ────────────────────────────────── */
 .contact-main-section {
   padding: 72px 0 80px;
-  background: var(--background);
+  background-color: #091827;
+  background-image:
+    linear-gradient(rgba(5,17,29,0.84), rgba(5,17,29,0.9)),
+    url('../assets/images/team-study.png');
+  background-position: center, 56% 42%;
+  background-size: cover;
 }
 
 .contact-layout {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 64px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
   align-items: start;
 }
 
@@ -95,13 +113,13 @@ body { background: var(--background); }
 .contact-help-text h2 {
   font-size: 1.55rem;
   font-weight: 700;
-  color: var(--navy);
+  color: #fff;
   letter-spacing: -0.03em;
   margin-bottom: 10px;
 }
 
 .contact-help-text p {
-  color: var(--muted);
+  color: rgba(255,255,255,0.78);
   line-height: 1.7;
   font-size: 0.95rem;
 }
@@ -117,6 +135,7 @@ body { background: var(--background); }
   border-radius: var(--radius-md);
   background: var(--white);
   overflow: hidden;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.2);
 }
 
 .channel-item {
@@ -125,12 +144,15 @@ body { background: var(--background); }
   gap: 16px;
   padding: 20px 22px;
   border-bottom: 1px solid var(--border);
-  transition: background 0.15s;
+  transition: background 0.15s, padding-left 0.15s;
 }
 
 .channel-item:last-child { border-bottom: none; }
 
-.channel-item:hover { background: var(--primary-light); }
+.channel-item:hover {
+  background: var(--primary-light);
+  padding-left: 26px;
+}
 
 .channel-icon {
   width: 40px;
@@ -203,11 +225,13 @@ address.channel-value { color: var(--muted); font-weight: 400; }
 
 /* ── RIGHT: Form card ──────────────────────────────────────── */
 .contact-form-card {
+  position: relative;
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 40px 36px;
+  border-top: 3px solid var(--green-brand);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.26);
+  padding: 40px 38px;
 }
 
 .form-card-title {
@@ -387,7 +411,11 @@ address.channel-value { color: var(--muted); font-weight: 400; }
 /* ── FAQ ────────────────────────────────────────────────────── */
 .faq-section {
   padding: 72px 0 88px;
-  background: #f3f6ff;
+  --faq-wash: linear-gradient(rgba(249,250,246,0.88), rgba(249,250,246,0.94));
+  background-color: #f3f6ff;
+  background-image: var(--faq-wash), url('../assets/images/educational-bg.jpg');
+  background-position: center, center;
+  background-size: cover;
 }
 
 .faq-list {
@@ -576,12 +604,24 @@ address.channel-value { color: var(--muted); font-weight: 400; }
   .contact-main-section { padding: 52px 0 60px; }
   .faq-section { padding: 52px 0 64px; }
   .contact-form-card { padding: 28px 22px; }
-  .contact-hero { padding: 56px 0 48px; }
+  .contact-hero {
+    min-height: 360px;
+    padding: 64px 0 56px;
+    background-size: auto 145%;
+    background-position: 78% 36%;
+  }
+  .contact-hero-title { font-size: 3rem; }
+  .contact-main-section { background-position: center, 58% center; }
 }
 
 @media (max-width: 480px) {
-  .contact-hero { padding: 44px 0 36px; }
-  .contact-hero-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+  .contact-hero {
+    min-height: 340px;
+    padding: 50px 0 44px;
+    background-size: auto 125%;
+    background-position: 76% 34%;
+  }
+  .contact-hero-title { font-size: 2.4rem; }
   .contact-hero-sub br { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
@@ -592,10 +632,17 @@ address.channel-value { color: var(--muted); font-weight: 400; }
 }
 
 @media (prefers-color-scheme: dark) {
-  .contact-main-section { background: var(--background); }
-  .faq-section { background: #0d1527; }
+  .contact-main-section {
+    background-color: var(--background);
+    background-image:
+      linear-gradient(rgba(4,10,18,0.86), rgba(4,10,18,0.92)),
+      url('../assets/images/team-study.png');
+  }
+  .faq-section {
+    --faq-wash: linear-gradient(rgba(10,14,20,0.88), rgba(10,14,20,0.94));
+    background-color: #0d1527;
+  }
   .faq-item { background: var(--white); }
-  .contact-help-text h2 { color: var(--navy); }
   .map-embed iframe { filter: invert(0.9) hue-rotate(180deg) saturate(0.6); }
 }
 
