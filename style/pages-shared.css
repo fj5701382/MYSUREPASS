@@ -1,1 +1,185 @@
-/* Shared Pages CSS */
+/* ============================================================
+   pages-shared.css — styles for shared navbar + mobile menu
+   injected by pages-shared.js on every interior page
+   ============================================================ */
+
+/* ── Sticky shared navbar ────────────────────────────────────── */
+.shared-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Override base .navbar for the injected header */
+.navbar {
+  background: #071a33;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-mark { width: 28px; height: 28px; }
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.72);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+}
+
+.nav-links a.is-active {
+  color: #34d399;
+  font-weight: 600;
+}
+
+/* Nav actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.nav-login {
+  color: rgba(255,255,255,0.72);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-login:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.07);
+}
+
+.user-avatar {
+  display: none; /* Hidden until auth; replace with real logic */
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  background: #071a33;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.mobile-menu.is-open {
+  display: block;
+}
+
+.mobile-menu nav {
+  padding: 12px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu nav a {
+  display: block;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 13px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.mobile-menu nav a:last-child { border-bottom: none; }
+
+.mobile-menu nav a:hover,
+.mobile-menu nav a.is-active {
+  color: #34d399;
+}
+
+.mobile-actions {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px 20px;
+}
+
+.mobile-actions .btn {
+  flex: 1;
+  justify-content: center;
+  min-height: 44px;
+}
+
+/* Responsive: show hamburger on tablet & below */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-login { display: none; }
+}
+
+@media (max-width: 480px) {
+  .navbar-inner { padding: 0 18px; }
+}
