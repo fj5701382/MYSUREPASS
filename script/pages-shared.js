@@ -56,10 +56,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNav = navbarHost.querySelector('.mobile-menu');
 
   if (headerHamburger && mobileNav) {
+    const setMenuOpen = (open) => {
+      mobileNav.classList.toggle('is-open', open);
+      document.body.classList.toggle('menu-open', open);
+      headerHamburger.setAttribute('aria-expanded', String(open));
+      headerHamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
     headerHamburger.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.toggle('is-open');
-      headerHamburger.setAttribute('aria-expanded', String(isOpen));
-      document.body.classList.toggle('menu-open', isOpen);
+      setMenuOpen(headerHamburger.getAttribute('aria-expanded') !== 'true');
+    });
+
+    mobileNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && headerHamburger.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        headerHamburger.focus();
+      }
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+      if (headerHamburger.getAttribute('aria-expanded') === 'true' && !navBar.contains(event.target)) {
+        setMenuOpen(false);
+      }
     });
   }
 
