@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <div class="nav-actions">
           <a href="login.html" class="nav-login">Log In</a>
-          <div class="user-avatar" aria-label="User account">AA</div>
           <button class="hamburger" id="hamburger" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
             <span></span><span></span><span></span>
           </button>
