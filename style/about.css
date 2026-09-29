@@ -15,7 +15,7 @@ body { background: var(--background); }
 
 /* ══════════════════════════════════════════════════════════════
    HERO — Full-bleed VR classroom background + dark overlay
-   Uses: student-vr.jpg (VR students in class)
+   Uses: student-vr.webp (VR students in class)
    ══════════════════════════════════════════════════════════════ */
 .about-hero {
   position: relative;
@@ -32,7 +32,7 @@ body { background: var(--background); }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../image/student-login\ 1.jpg');
+  background-image: url('../assets/images/student-vr.webp');
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
@@ -143,7 +143,7 @@ body { background: var(--background); }
   bottom: -30px;
   width: 180px;
   height: 180px;
-  background-image: url('../image/realistic_high_quality_photograph_of_an_inspiring_nigerian_young_female_student.png');
+  background-image: url('../assets/images/team-student.webp');
   background-size: cover;
   background-position: center top;
   border-radius: 50%;
@@ -203,7 +203,7 @@ body { background: var(--background); }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../image/high_quality_authentic_photograph_of_cheerful_focused_young_adult_nigerian.png');
+  background-image: url('../assets/images/team-study.webp');
   background-size: cover;
   background-position: center 45%;
   z-index: 0;
@@ -401,7 +401,7 @@ body { background: var(--background); }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../image/realistic_high_quality_photograph_of_an_inspiring_nigerian_young_female_student.png');
+  background-image: url('../assets/images/team-student.webp');
   background-size: cover;
   background-position: center center;
   transition: transform 6s ease;
@@ -490,7 +490,7 @@ body { background: var(--background); }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../image/high_quality_authentic_photograph_of_cheerful_focused_young_adult_nigerian.png');
+  background-image: url('../assets/images/team-study.webp');
   background-size: cover;
   background-position: center 25%;
   z-index: 0;
@@ -655,7 +655,7 @@ body { background: var(--background); }
 
 /* ══════════════════════════════════════════════════════════════
    CTA — Full-bleed photo with glassmorphism card on top
-   Uses: student-vr.jpg as background
+   Uses: student-vr.webp as background
    ══════════════════════════════════════════════════════════════ */
 .about-cta-section {
   position: relative;
@@ -667,7 +667,7 @@ body { background: var(--background); }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../image/student-login\ 1.jpg');
+  background-image: url('../assets/images/student-vr.webp');
   background-size: cover;
   background-position: center 20%;
   z-index: 0;

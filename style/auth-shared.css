@@ -228,7 +228,7 @@ img, svg { display: block; }
 .auth-right-panel {
   flex: 1;
   background-color: var(--auth-bg-right);
-  background-image: url('../assets/images/educational-bg.jpg');
+  background-image: url('../assets/images/educational-bg.webp');
   background-size: cover;
   background-position: center;
   background-blend-mode: soft-light;

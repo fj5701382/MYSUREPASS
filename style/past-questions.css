@@ -204,7 +204,7 @@ button {
   min-height: 390px;
   padding: 84px 0 54px;
   background-color: var(--navy);
-  background-image: url('../assets/images/team-study.png');
+  background-image: url('../assets/images/team-study.webp');
   background-size: cover;
   background-position: center 48%;
 }
@@ -265,7 +265,7 @@ button {
 .search-section {
   --search-section-wash: linear-gradient(rgba(249, 250, 246, 0.9), rgba(249, 250, 246, 0.94));
   padding: 6px 0 0;
-  background-image: var(--search-section-wash), url('../assets/images/educational-bg.jpg');
+  background-image: var(--search-section-wash), url('../assets/images/educational-bg.webp');
   background-position: center, center top;
   background-size: cover, 760px auto;
   background-repeat: no-repeat, repeat;

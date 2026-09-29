@@ -21,7 +21,7 @@ body { background: var(--background); }
   align-items: center;
   min-height: 430px;
   background-color: #071a33;
-  background-image: url('../assets/images/team-amina.png');
+  background-image: url('../assets/images/team-amina.webp');
   background-size: auto 160%;
   background-position: 82% 35%;
   background-repeat: no-repeat;
@@ -91,7 +91,7 @@ body { background: var(--background); }
   background-color: #091827;
   background-image:
     linear-gradient(rgba(5,17,29,0.84), rgba(5,17,29,0.9)),
-    url('../assets/images/team-study.png');
+    url('../assets/images/team-study.webp');
   background-position: center, 56% 42%;
   background-size: cover;
 }
@@ -413,7 +413,7 @@ address.channel-value { color: var(--muted); font-weight: 400; }
   padding: 72px 0 88px;
   --faq-wash: linear-gradient(rgba(249,250,246,0.88), rgba(249,250,246,0.94));
   background-color: #f3f6ff;
-  background-image: var(--faq-wash), url('../assets/images/educational-bg.jpg');
+  background-image: var(--faq-wash), url('../assets/images/educational-bg.webp');
   background-position: center, center;
   background-size: cover;
 }
@@ -636,7 +636,7 @@ address.channel-value { color: var(--muted); font-weight: 400; }
     background-color: var(--background);
     background-image:
       linear-gradient(rgba(4,10,18,0.86), rgba(4,10,18,0.92)),
-      url('../assets/images/team-study.png');
+      url('../assets/images/team-study.webp');
   }
   .faq-section {
     --faq-wash: linear-gradient(rgba(10,14,20,0.88), rgba(10,14,20,0.94));
