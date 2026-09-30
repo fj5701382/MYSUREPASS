@@ -1,19 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MySurePass - dashboard</title>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/responsive.css">
-<link rel="stylesheet" href="style/pages-shared.css">
-<link rel="stylesheet" href="style/dashboard.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Dashboard — MySurePass</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/dashboard.css" />
+  <script src="script/dashboard.js" defer></script>
 </head>
-<body>
-<div data-shared-navbar></div>
-<main>
-<h1>dashboard</h1>
-</main>
-<script src="script/pages-shared.js" defer></script>
-<script src="script/dashboard.js" defer></script>
+<body class="app-body" data-dashboard-role="student">
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="app-shell">
+
+    <aside class="app-sidebar" id="appSidebar" aria-label="Sidebar">
+      <a class="app-brand" href="index.html" aria-label="MySurePass home">
+        <img src="assets/images/logo.svg" alt="" width="32" height="32" />
+        <span>MySurePass</span>
+      </a>
+
+      <nav class="app-nav" aria-label="Dashboard navigation">
+        <a class="app-nav-link is-active" href="dashboard.html" aria-current="page">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+          Dashboard
+        </a>
+        <a class="app-nav-link" href="cbt-practice.html">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 13l2 2 4-4"/></svg>
+          CBT Practice
+        </a>
+        <a class="app-nav-link" href="past-questions.html">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h6"/></svg>
+          Past Questions
+        </a>
+        <a class="app-nav-link" href="subjects.html">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 016.5 2H20v17H6.5A2.5 2.5 0 004 21.5z"/></svg>
+          Subjects
+        </a>
+        <a class="app-nav-link" href="support.html">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 015 .5c0 1.5-2.5 2-2.5 3.5"/><path d="M12 17h.01"/></svg>
+          Help &amp; Support
+        </a>
+      </nav>
+
+      <div class="app-sidebar-footer">
+        <!-- TODO: end the real session when the backend exists. -->
+        <a class="app-nav-link" href="login.html">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5V3h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          Log out
+        </a>
+      </div>
+    </aside>
+
+    <div class="app-scrim" id="appScrim" hidden></div>
+
+    <div class="app-main-wrap">
+
+      <header class="app-topbar">
+        <button class="app-menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="appSidebar">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <span class="app-topbar-title">Dashboard</span>
+        <span class="app-topbar-role">Student</span>
+      </header>
+
+      <main id="main" class="app-content">
+
+        <section class="app-welcome">
+          <h1>Welcome to MySurePass</h1>
+          <p>Practise with past questions and CBT-style tests, then come back here to see how you're improving.</p>
+          <div class="app-welcome-actions">
+            <a class="btn btn-primary" href="cbt-practice.html">Start CBT practice</a>
+            <a class="btn btn-secondary" href="past-questions.html">Browse past questions</a>
+          </div>
+        </section>
+
+        <section class="app-stats" aria-label="Your progress">
+          <div class="app-card app-stat">
+            <p class="app-stat-label">Tests taken</p>
+            <p class="app-stat-value">0</p>
+          </div>
+          <div class="app-card app-stat">
+            <p class="app-stat-label">Average score</p>
+            <p class="app-stat-value">—</p>
+          </div>
+          <div class="app-card app-stat">
+            <p class="app-stat-label">Practice streak</p>
+            <p class="app-stat-value">0 days</p>
+          </div>
+          <div class="app-card app-stat">
+            <p class="app-stat-label">Subjects practised</p>
+            <p class="app-stat-value">0</p>
+          </div>
+        </section>
+        <p class="app-stat-note">Your numbers will appear here after your first practice test.</p>
+
+        <section class="app-section" aria-labelledby="examsHeading">
+          <h2 id="examsHeading">Choose your exam</h2>
+          <div class="app-grid">
+            <div class="app-card app-action">
+              <h3>JAMB (UTME)</h3>
+              <p>Practise the subjects you need for university admission.</p>
+              <a class="app-card-link" href="past-questions.html">Practise JAMB &rarr;</a>
+            </div>
+            <div class="app-card app-action">
+              <h3>WAEC (WASSCE)</h3>
+              <p>Work through past questions for your school certificate exams.</p>
+              <a class="app-card-link" href="past-questions.html">Practise WAEC &rarr;</a>
+            </div>
+            <div class="app-card app-action">
+              <h3>NECO (SSCE)</h3>
+              <p>Prepare with questions from previous NECO papers.</p>
+              <a class="app-card-link" href="past-questions.html">Practise NECO &rarr;</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="app-section" aria-labelledby="activityHeading">
+          <h2 id="activityHeading">Recent activity</h2>
+          <div class="app-card app-empty">
+            <div class="app-empty-icon">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 13l2 2 4-4"/></svg>
+            </div>
+            <h3>No activity yet</h3>
+            <p>When you take a practice test, your scores and recent sessions will show up here.</p>
+            <a class="btn btn-primary" href="cbt-practice.html">Start your first practice</a>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
 </body>
 </html>
