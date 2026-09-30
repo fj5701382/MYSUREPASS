@@ -86,5 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (navBar) {
     navBar.classList.add('shared-navbar');
+
+    const reserveNavbarSpace = () => {
+      navbarHost.style.minHeight = `${navBar.getBoundingClientRect().height}px`;
+    };
+
+    reserveNavbarSpace();
+    window.addEventListener('resize', reserveNavbarSpace);
   }
 });

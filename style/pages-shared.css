@@ -3,11 +3,13 @@
    injected by pages-shared.js on every interior page
    ============================================================ */
 
-/* ── Sticky shared navbar ────────────────────────────────────── */
-.shared-navbar {
-  position: sticky;
+/* ── Fixed shared navbar ─────────────────────────────────────── */
+.navbar.shared-navbar {
+  position: fixed;
   top: 0;
-  z-index: 100;
+  right: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 /* Override base .navbar for the injected header */

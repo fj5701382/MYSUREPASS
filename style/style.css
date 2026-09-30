@@ -147,6 +147,14 @@ body {
   color: var(--primary);
 }
 
+.navbar.shared-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
 .navbar {
   z-index: 30;
   background: #071a33; /* Dark background matching past-questions */
