@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!navbarHost) return;
 
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const activePathByPage = {
+    'cbt-practice.html': 'past-questions.html',
+    'subjects.html': 'past-questions.html',
+    'dashboard.html': 'index.html',
+    'privacy.html': 'about.html',
+    'terms.html': 'about.html'
+  };
+  const activePath = activePathByPage[currentPath] || currentPath;
   const navItems = [
     { label: 'Home', href: 'index.html', key: 'index.html' },
     { label: 'Past Questions', href: 'past-questions.html', key: 'past-questions.html' },
@@ -22,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <nav class="nav-links" aria-label="Main navigation">
           ${navItems.map(({ label, href, key }) => `
-            <a href="${href}" ${currentPath === key ? 'aria-current="page" class="is-active"' : ''}>${label}</a>
+            <a href="${href}" ${activePath === key ? 'aria-current="page" class="is-active"' : ''}>${label}</a>
           `).join('')}
         </nav>
 
@@ -37,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="mobile-menu" id="mobileMenu">
         <nav aria-label="Mobile navigation">
           ${navItems.map(({ label, href, key }) => `
-            <a href="${href}" ${currentPath === key ? 'aria-current="page" class="is-active"' : ''}>${label}</a>
+            <a href="${href}" ${activePath === key ? 'aria-current="page" class="is-active"' : ''}>${label}</a>
           `).join('')}
         </nav>
         <div class="mobile-actions">

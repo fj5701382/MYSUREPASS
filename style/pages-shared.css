@@ -12,15 +12,14 @@
   z-index: 1000;
 }
 
-/* Override base .navbar for the injected header */
-.navbar {
+.navbar.shared-navbar {
   background: #071a33;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
-.navbar-inner {
+.navbar.shared-navbar .navbar-inner {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 32px;
@@ -32,7 +31,7 @@
 }
 
 /* Logo */
-.logo {
+.navbar.shared-navbar .logo {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -43,10 +42,10 @@
   flex-shrink: 0;
 }
 
-.logo-mark { width: 28px; height: 28px; }
+.navbar.shared-navbar .logo-mark { width: 28px; height: 28px; }
 
 /* Nav links */
-.nav-links {
+.navbar.shared-navbar .nav-links {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -54,10 +53,14 @@
   justify-content: center;
 }
 
-.nav-links a {
+.navbar.shared-navbar .nav-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   color: rgba(255,255,255,0.72);
   font-size: 0.9rem;
   font-weight: 500;
+  min-height: 42px;
   padding: 6px 12px;
   border-radius: 8px;
   text-decoration: none;
@@ -65,25 +68,50 @@
   white-space: nowrap;
 }
 
-.nav-links a:hover {
+.navbar.shared-navbar .nav-links a::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: #34d399;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.navbar.shared-navbar .nav-links a:hover {
   color: #fff;
   background: rgba(255,255,255,0.07);
 }
 
-.nav-links a.is-active {
+.navbar.shared-navbar .nav-links a.is-active {
   color: #34d399;
   font-weight: 600;
 }
 
+.navbar.shared-navbar .nav-links a.is-active::after,
+.navbar.shared-navbar .nav-links a:hover::after,
+.navbar.shared-navbar .nav-links a:focus-visible::after {
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  width: auto;
+  background: #34d399;
+  transform: scaleX(1);
+}
+
 /* Nav actions */
-.nav-actions {
+.navbar.shared-navbar .nav-actions {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
 }
 
-.nav-login {
+.navbar.shared-navbar .nav-login {
   color: rgba(255,255,255,0.72);
   font-size: 0.88rem;
   font-weight: 500;
@@ -93,7 +121,7 @@
   transition: color 0.15s, background 0.15s;
 }
 
-.nav-login:hover {
+.navbar.shared-navbar .nav-login:hover {
   color: #fff;
   background: rgba(255,255,255,0.07);
 }
@@ -103,7 +131,7 @@
 }
 
 /* Hamburger button */
-.hamburger {
+.navbar.shared-navbar .hamburger {
   display: none;
   align-items: center;
   justify-content: center;
@@ -119,7 +147,7 @@
   padding: 10px;
 }
 
-.hamburger span {
+.navbar.shared-navbar .hamburger span {
   display: block;
   width: 100%;
   height: 2px;
@@ -129,23 +157,23 @@
 }
 
 /* Mobile menu */
-.mobile-menu {
+.navbar.shared-navbar .mobile-menu {
   display: none;
   background: #071a33;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 
-.mobile-menu.is-open {
+.navbar.shared-navbar .mobile-menu.is-open {
   display: block;
 }
 
-.mobile-menu nav {
+.navbar.shared-navbar .mobile-menu nav {
   padding: 12px 20px 0;
   display: flex;
   flex-direction: column;
 }
 
-.mobile-menu nav a {
+.navbar.shared-navbar .mobile-menu nav a {
   display: block;
   color: rgba(255,255,255,0.72);
   font-size: 0.95rem;
@@ -156,20 +184,20 @@
   transition: color 0.15s;
 }
 
-.mobile-menu nav a:last-child { border-bottom: none; }
+.navbar.shared-navbar .mobile-menu nav a:last-child { border-bottom: none; }
 
-.mobile-menu nav a:hover,
-.mobile-menu nav a.is-active {
+.navbar.shared-navbar .mobile-menu nav a:hover,
+.navbar.shared-navbar .mobile-menu nav a.is-active {
   color: #34d399;
 }
 
-.mobile-actions {
+.navbar.shared-navbar .mobile-actions {
   display: flex;
   gap: 12px;
   padding: 16px 20px 20px;
 }
 
-.mobile-actions .btn {
+.navbar.shared-navbar .mobile-actions .btn {
   flex: 1;
   justify-content: center;
   min-height: 44px;
@@ -177,13 +205,13 @@
 
 /* Responsive: show hamburger on tablet & below */
 @media (max-width: 1024px) {
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .nav-login { display: none; }
+  .navbar.shared-navbar .nav-links { display: none; }
+  .navbar.shared-navbar .hamburger { display: flex; }
+  .navbar.shared-navbar .nav-login { display: none; }
 }
 
 @media (max-width: 480px) {
-  .navbar-inner { padding: 0 18px; }
+  .navbar.shared-navbar .navbar-inner { padding: 0 18px; }
 }
 
 
