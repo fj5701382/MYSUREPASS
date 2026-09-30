@@ -2,13 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');
   const identifierInput = document.getElementById('identifier');
   const passwordInput = document.getElementById('password');
-  const rememberMeCheckbox = document.getElementById('rememberMe');
-  const googleBtn = document.getElementById('googleBtn');
-  const appleBtn = document.getElementById('appleBtn');
   const submitBtn = document.getElementById('submitBtn');
-
-  const identifierError = document.getElementById('identifierError');
-  const passwordError = document.getElementById('passwordError');
 
   function setInputError(input, message) {
     const shell = input.closest('.input-shell');
@@ -17,25 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (error) error.textContent = message || '';
   }
 
-  if (googleBtn) {
-    googleBtn.addEventListener('click', () => {
-      // TODO: connect real OAuth.
-      console.log('Google OAuth placeholder');
-    });
-  }
-
-  if (appleBtn) {
-    appleBtn.addEventListener('click', () => {
-      // TODO: connect real OAuth.
-      console.log('Apple OAuth placeholder');
-    });
-  }
-
-  if (rememberMeCheckbox) {
-    rememberMeCheckbox.addEventListener('change', (event) => {
-      console.log('Remember me selected:', event.target.checked);
-    });
-  }
+  // TODO: connect real Google OAuth to #googleBtn.
+  // TODO: connect real Apple OAuth to #appleBtn.
+  // TODO: persist "remember me" (#rememberMe) once a real session exists.
 
   if (loginForm) {
     loginForm.addEventListener('submit', (event) => {
@@ -69,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Logging in...';
 
-      // TODO: connect real backend fetch() call here.
+      // TODO: replace this timer with a real backend fetch() call and only
+      // redirect when the server confirms the login succeeded.
       setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Log In';
+        window.location.href = 'dashboard.html';
       }, 1000);
     });
   }

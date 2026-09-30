@@ -2,8 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const otpInputs = [...document.querySelectorAll('.otp-input')];
   const countdownText = document.getElementById('countdownText');
   const resendBtn = document.getElementById('resendBtn');
-  const smsButton = document.getElementById('smsLinkBtn');
   const verifyForm = document.getElementById('verifyForm');
+  const verifyMessage = document.getElementById('verifyMessage');
+  const submitBtn = verifyForm ? verifyForm.querySelector('button[type="submit"]') : null;
+
+  // TODO: connect the "Verify via SMS instead" button (#smsLinkBtn) to the backend.
+
+  function showMessage(text, type) {
+    if (!verifyMessage) return;
+    verifyMessage.textContent = text;
+    verifyMessage.className = 'verify-message ' + (type ? 'is-' + type : '');
+  }
+
+  function clearOtpErrors() {
+    otpInputs.forEach((input) => { input.style.borderColor = ''; });
+  }
 
   if (otpInputs.length) {
     const fillCode = (startIndex, rawCode) => {
@@ -16,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
         target.classList.add('filled');
       });
 
+      clearOtpErrors();
+      showMessage('', '');
       otpInputs[Math.min(startIndex + digits.length, otpInputs.length - 1)].focus();
     };
 
@@ -31,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         event.target.value = value;
         if (value) event.target.classList.add('filled');
         else event.target.classList.remove('filled');
+
+        event.target.style.borderColor = '';
+        showMessage('', '');
 
         if (value && index < otpInputs.length - 1) {
           otpInputs[index + 1].focus();
@@ -54,10 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (countdownText) {
     let seconds = 59;
     const tick = () => {
-      const display = `0:${String(seconds).padStart(2, '0')}`;
-      countdownText.textContent = display;
+      countdownText.textContent = `0:${String(seconds).padStart(2, '0')}`;
       if (seconds <= 0) {
-        countdownText.textContent = '0:00';
         if (resendBtn) {
           resendBtn.disabled = false;
           resendBtn.textContent = 'Resend code';
@@ -75,28 +91,32 @@ document.addEventListener('DOMContentLoaded', () => {
     tick();
   }
 
-  if (smsButton) {
-    smsButton.addEventListener('click', () => {
-      // TODO: connect real backend here.
-      console.log('Verify via SMS instead clicked');
-    });
-  }
-
   if (verifyForm) {
     verifyForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const values = otpInputs.map((input) => input.value.trim());
-      const filled = values.every(Boolean);
+      const filled = otpInputs.every((input) => input.value.trim());
 
       if (!filled) {
-        otpInputs.forEach((input) => {
-          input.style.borderColor = '#d93a3a';
-        });
+        otpInputs.forEach((input) => { input.style.borderColor = '#d93a3a'; });
+        showMessage('Please enter all 6 digits of your code.', 'error');
+        const firstEmpty = otpInputs.find((input) => !input.value.trim());
+        if (firstEmpty) firstEmpty.focus();
         return;
       }
 
-      // TODO: connect real backend fetch() call here.
-      alert('Demo verification accepted.');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying...';
+      }
+
+      // TODO: replace this timer with a real backend fetch() call and only
+      // redirect when the server confirms the code is correct.
+      setTimeout(() => {
+        showMessage('Account verified! Taking you to your dashboard...', 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1200);
+      }, 800);
     });
   }
 
@@ -104,13 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
     resendBtn.addEventListener('click', () => {
       // TODO: connect real backend.
       if (resendBtn.disabled) return;
-      if (countdownText) countdownText.textContent = '0:59';
       resendBtn.disabled = true;
-      resendBtn.textContent = 'Resend code in 0:59';
       let seconds = 59;
       const timer = () => {
-        const display = `0:${String(seconds).padStart(2, '0')}`;
-        countdownText.textContent = display;
+        if (countdownText) countdownText.textContent = `0:${String(seconds).padStart(2, '0')}`;
+        resendBtn.textContent = `Resend code in 0:${String(seconds).padStart(2, '0')}`;
         if (seconds <= 0) {
           resendBtn.disabled = false;
           resendBtn.textContent = 'Resend code';

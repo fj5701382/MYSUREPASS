@@ -76,3 +76,19 @@
     gap: clamp(4px, 1.5vw, 8px);
   }
 }
+
+
+
+
+
+/* Inline status message under the code boxes */
+.verify-message {
+  min-height: 1.4em;
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.verify-message.is-error { color: #d93a3a; }
+.verify-message.is-success { color: var(--auth-green-dark); }
