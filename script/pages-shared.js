@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { label: 'Past Questions', href: 'past-questions.html', key: 'past-questions.html' },
     { label: 'Contact Us', href: 'support.html', key: 'support.html' },
     { label: 'About Us', href: 'about.html', key: 'about.html' },
-    { label: 'For Teachers', href: 'teachers.html', key: 'teachers.html' },
+    { label: 'For Teachers', href: 'login.html', key: 'teachers.html' },
     { label: 'API', href: 'api.html', key: 'api.html' }
   ];
 

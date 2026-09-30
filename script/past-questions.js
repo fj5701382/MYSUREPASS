@@ -52,6 +52,12 @@ const nextPageButton = document.getElementById('nextPage');
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
+questionGrid.addEventListener('click', (event) => {
+  if (event.target.closest('.card-btn.primary')) {
+    window.location.href = 'login.html';
+  }
+});
+
 let currentPage = 1;
 
 function getBadgeClass(exam) {
