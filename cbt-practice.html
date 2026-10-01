@@ -1,19 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>MySurePass - cbt-practice</title>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/responsive.css">
-<link rel="stylesheet" href="style/pages-shared.css">
-<link rel="stylesheet" href="style/cbt-practice.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CBT Practice — MySurePass</title>
+  <meta name="description" content="Practise in a computer-based test format: choose a subject, set a timer, answer questions one at a time and review your results." />
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/responsive.css" />
+  <link rel="stylesheet" href="style/pages-shared.css" />
+  <link rel="stylesheet" href="style/cbt-practice.css" />
 </head>
 <body>
-<div data-shared-navbar></div>
-<main>
-<h1>cbt-practice</h1>
-</main>
-<script src="script/pages-shared.js" defer></script>
-<script src="script/cbt-practice.js" defer></script>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div data-shared-navbar></div>
+
+  <main id="main" class="cbt">
+    <div class="container">
+
+      <!-- 1. Setup -->
+      <section class="cbt-setup" id="cbtSetup">
+        <span class="cbt-eyebrow">CBT PRACTICE</span>
+        <h1>Practise like it's the real exam</h1>
+        <p class="cbt-lead">Pick a subject, set your timer and answer one question at a time, just like a computer-based test.</p>
+
+        <div class="cbt-card cbt-resume" id="resumeCard" hidden>
+          <p id="resumeText"></p>
+          <div class="cbt-inline-actions">
+            <button class="btn btn-primary" type="button" id="resumeBtn">Resume test</button>
+            <button class="btn btn-secondary" type="button" id="discardBtn">Discard it</button>
+          </div>
+        </div>
+
+        <form class="cbt-card cbt-form" id="cbtForm">
+          <div class="cbt-field">
+            <label for="cbtSubject">Subject</label>
+            <select id="cbtSubject" required>
+              <option>Mathematics</option>
+              <option>English Language</option>
+              <option>Biology</option>
+              <option>Chemistry</option>
+              <option>Physics</option>
+            </select>
+          </div>
+
+          <div class="cbt-row">
+            <div class="cbt-field">
+              <label for="cbtCount">Number of questions</label>
+              <select id="cbtCount">
+                <option value="5">5 questions</option>
+                <option value="10" selected>10 questions</option>
+              </select>
+            </div>
+            <div class="cbt-field">
+              <label for="cbtTime">Timer</label>
+              <select id="cbtTime">
+                <option value="0">No timer</option>
+                <option value="5">5 minutes</option>
+                <option value="10" selected>10 minutes</option>
+                <option value="15">15 minutes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cbt-field">
+            <label for="cbtLevel">Your class level (optional)</label>
+            <select id="cbtLevel">
+              <option value="">Prefer not to say</option>
+              <option value="SS1">SS1</option>
+              <option value="SS2">SS2</option>
+              <option value="SS3">SS3</option>
+              <option value="Candidate">Exam candidate (JAMB / WAEC / NECO)</option>
+            </select>
+            <small>Used later to personalise your practice. Saved on this device only.</small>
+          </div>
+
+          <button class="btn btn-primary btn-lg" type="submit">Start test</button>
+        </form>
+
+        <p class="cbt-note">These are <strong>sample practice questions</strong> so you can try the CBT experience. They are not real past exam papers. Full past-question sets are coming. You can already browse <a href="past-questions.html">past questions</a>.</p>
+      </section>
+
+      <!-- 2. Test -->
+      <section id="cbtTest" hidden aria-label="Practice test">
+        <div class="cbt-bar">
+          <h2 class="cbt-bar-title" id="testSubject">Practice</h2>
+          <div class="cbt-bar-end">
+            <div class="cbt-timer" id="timer" role="timer" aria-label="Time remaining">
+              <span id="timerText">0:00</span>
+            </div>
+            <button class="btn btn-secondary" type="button" id="quitBtn">Quit</button>
+            <button class="btn btn-primary" type="button" id="submitBtn">Submit test</button>
+          </div>
+        </div>
+        <p class="cbt-sr" id="timerAnnounce" aria-live="polite"></p>
+
+        <div class="cbt-progress" aria-hidden="true"><span id="progressFill"></span></div>
+
+        <div class="cbt-layout">
+          <div class="cbt-card cbt-question">
+            <p class="cbt-qnum" id="qNumber">Question 1</p>
+            <fieldset class="cbt-fieldset">
+              <legend class="cbt-qtext" id="qText" tabindex="-1"></legend>
+              <div class="cbt-options" id="qOptions"></div>
+            </fieldset>
+
+            <div class="cbt-actions">
+              <button class="btn btn-secondary" type="button" id="prevBtn">Previous</button>
+              <button class="btn btn-secondary" type="button" id="flagBtn" aria-pressed="false">Mark for review</button>
+              <button class="btn btn-secondary" type="button" id="clearBtn">Clear answer</button>
+              <span class="cbt-spacer"></span>
+              <button class="btn btn-primary" type="button" id="nextBtn">Next</button>
+            </div>
+          </div>
+
+          <aside class="cbt-card cbt-palette" aria-label="Question navigator">
+            <h2>Questions</h2>
+            <div class="cbt-palette-grid" id="palette"></div>
+            <ul class="cbt-legend">
+              <li><span class="cbt-dot is-answered"></span> Answered</li>
+              <li><span class="cbt-dot is-flagged"></span> Marked for review</li>
+              <li><span class="cbt-dot is-current"></span> Current question</li>
+              <li><span class="cbt-dot"></span> Not answered</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 3. Result -->
+      <section class="cbt-result" id="cbtResult" hidden>
+        <span class="cbt-eyebrow" id="resultTitle">RESULTS</span>
+        <h1 id="resultHeading" tabindex="-1">Your results</h1>
+
+        <p class="cbt-note" id="resultNotice" hidden>Time's up! Your test was submitted automatically.</p>
+
+        <div class="cbt-card cbt-score">
+          <p class="cbt-score-value" id="scoreValue">0 / 0</p>
+          <p class="cbt-score-percent" id="scorePercent">0%</p>
+          <p class="cbt-score-message" id="scoreMessage"></p>
+        </div>
+
+        <div class="cbt-stats">
+          <div class="cbt-card cbt-stat"><b id="statCorrect">0</b><span>Correct</span></div>
+          <div class="cbt-card cbt-stat"><b id="statWrong">0</b><span>Incorrect</span></div>
+          <div class="cbt-card cbt-stat"><b id="statSkipped">0</b><span>Not answered</span></div>
+          <div class="cbt-card cbt-stat"><b id="statTime">0:00</b><span>Time used</span></div>
+        </div>
+
+        <div class="cbt-result-actions">
+          <button class="btn btn-primary" type="button" id="retryBtn">Try again</button>
+          <button class="btn btn-secondary" type="button" id="newBtn">Choose another subject</button>
+          <a class="btn btn-secondary" href="dashboard.html">Back to dashboard</a>
+        </div>
+
+        <div class="cbt-review">
+          <h2>Review your answers</h2>
+          <div class="cbt-review-list" id="reviewList"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dialogs -->
+  <dialog class="cbt-dialog" id="submitDialog" aria-labelledby="submitTitle">
+    <h2 id="submitTitle">Submit your test?</h2>
+    <p id="submitSummary"></p>
+    <div class="cbt-inline-actions">
+      <button class="btn btn-secondary" type="button" id="submitCancel">Go back</button>
+      <button class="btn btn-primary" type="button" id="submitConfirm">Submit test</button>
+    </div>
+  </dialog>
+
+  <dialog class="cbt-dialog" id="quitDialog" aria-labelledby="quitTitle">
+    <h2 id="quitTitle">Quit this test?</h2>
+    <p>Your answers so far will be lost and nothing will be scored.</p>
+    <div class="cbt-inline-actions">
+      <button class="btn btn-secondary" type="button" id="quitCancel">Keep going</button>
+      <button class="btn btn-primary" type="button" id="quitConfirm">Quit test</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="MySurePass home">
+          <img src="assets/images/logo.svg" alt="" width="34" height="34" />
+          <span>MySurePass</span>
+        </a>
+        <p>Nigeria's technology-driven learning support hub. Prepare for WAEC, JAMB, and NECO exams with ultimate confidence.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter/X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.844L2.25 2.25h6.838l4.26 5.625L18.244 2.25zm-1.162 17.5h1.833L7.084 4.126H5.117L17.082 19.75z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>PRODUCT</h3>
+        <ul>
+          <li><a href="past-questions.html">Past Questions</a></li>
+          <li><a href="cbt-practice.html">Practice Exams</a></li>
+          <li><a href="subjects.html">Revision Guides</a></li>
+          <li><a href="api.html">API Integrations</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>COMPANY</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="teachers.html">For Teachers</a></li>
+          <li><a href="support.html">Careers</a></li>
+          <li><a href="support.html">Press Media</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>SUPPORT</h3>
+        <ul>
+          <li><a href="support.html">Help Center</a></li>
+          <li><a href="support.html">Status Updates</a></li>
+          <li><a href="support.html">Safety Rules</a></li>
+          <li><a href="support.html">Contact Support</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>LEGAL</h3>
+        <ul>
+          <li><a href="privacy.html">Privacy Charter</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html#cookies">Cookie Policy</a></li>
+          <li><a href="terms.html">NLA Guide</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© 2026 MySurePass Technologies. Built for premium results.</span>
+      <span class="footer-location">Lagos, Nigeria • West Africa</span>
+    </div>
+  </footer>
+
+  <script src="script/pages-shared.js" defer></script>
+  <script src="script/cbt-practice.js" defer></script>
 </body>
 </html>

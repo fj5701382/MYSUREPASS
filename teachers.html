@@ -3,166 +3,298 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Teacher Dashboard — MySurePass</title>
-  <meta name="robots" content="noindex" />
+  <title>For Teachers — MySurePass</title>
+  <meta name="description" content="MySurePass for teachers: build timed quizzes and assignments for your class, reuse your questions and see how your students perform. Tools are being rolled out now." />
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" /></noscript>
   <link rel="stylesheet" href="style/style.css" />
-  <link rel="stylesheet" href="style/dashboard.css" />
-  <script src="script/dashboard.js" defer></script>
+  <link rel="stylesheet" href="style/responsive.css" />
+  <link rel="stylesheet" href="style/pages-shared.css" />
+  <link rel="stylesheet" href="style/teachers.css" />
 </head>
-<body class="app-body" data-dashboard-role="teacher">
+<body>
 
   <a class="skip-link" href="#main">Skip to main content</a>
+  <div data-shared-navbar></div>
 
-  <div class="app-shell">
+  <main id="main">
 
-    <aside class="app-sidebar" id="appSidebar" aria-label="Sidebar">
-      <a class="app-brand" href="index.html" aria-label="MySurePass home">
-        <img src="assets/images/logo.svg" alt="" width="32" height="32" />
-        <span>MySurePass</span>
-      </a>
-
-      <nav class="app-nav" aria-label="Dashboard navigation">
-        <a class="app-nav-link is-active" href="teacher-dashboard.html" aria-current="page">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-          Dashboard
-        </a>
-
-        <span class="app-nav-link is-disabled" aria-disabled="true">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h6"/></svg>
-          My Exams <span class="app-soon">Soon</span>
-        </span>
-        <span class="app-nav-link is-disabled" aria-disabled="true">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-          Create Exam <span class="app-soon">Soon</span>
-        </span>
-        <span class="app-nav-link is-disabled" aria-disabled="true">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
-          Question Bank <span class="app-soon">Soon</span>
-        </span>
-        <span class="app-nav-link is-disabled" aria-disabled="true">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 4.5a3.5 3.5 0 010 7"/><path d="M18 14.5a6.5 6.5 0 013.5 5.5"/></svg>
-          Students <span class="app-soon">Soon</span>
-        </span>
-        <span class="app-nav-link is-disabled" aria-disabled="true">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
-          Results <span class="app-soon">Soon</span>
-        </span>
-
-        <a class="app-nav-link" href="support.html">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 015 .5c0 1.5-2.5 2-2.5 3.5"/><path d="M12 17h.01"/></svg>
-          Help &amp; Support
-        </a>
-      </nav>
-
-      <div class="app-sidebar-footer">
-        <!-- TODO: end the real session when the backend exists. -->
-        <a class="app-nav-link" href="login.html">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5V3h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-          Log out
-        </a>
-      </div>
-    </aside>
-
-    <div class="app-scrim" id="appScrim" hidden></div>
-
-    <div class="app-main-wrap">
-
-      <header class="app-topbar">
-        <button class="app-menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="appSidebar">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-        <span class="app-topbar-title">Dashboard</span>
-        <span class="app-topbar-role">Teacher</span>
-      </header>
-
-      <main id="main" class="app-content">
-
-        <section class="app-welcome">
-          <h1>Welcome, Teacher</h1>
-          <p>This is your classroom hub. Quizzes, assignments and student results will live here.</p>
-        </section>
-
-        <div class="app-notice" role="note">
-          <strong>Teacher tools are coming soon.</strong> We're still building quizzes, assignments and results. Items marked "Soon" will unlock as they're ready.
+    <!-- Hero -->
+    <section class="t-hero">
+      <div class="container t-hero-grid">
+        <div>
+          <span class="t-eyebrow">FOR TEACHERS</span>
+          <h1>Quizzes and assignments your students can take on their phones</h1>
+          <p class="t-hero-text">MySurePass is building simple tools for Nigerian teachers: create timed quizzes, reuse your questions, and see where your class needs help before the real exam.</p>
+          <div class="t-hero-actions">
+            <a href="register.html" class="btn btn-primary btn-lg">Create teacher account</a>
+            <a href="#features" class="btn btn-secondary btn-lg">See what's coming</a>
+          </div>
+          <p class="t-hero-note">Already have an account? <a href="login.html">Log in</a></p>
         </div>
 
-        <section class="app-stats" aria-label="Your classroom overview">
-          <div class="app-card app-stat">
-            <p class="app-stat-label">Exams</p>
-            <p class="app-stat-value">0</p>
+        <div class="t-mock" aria-hidden="true">
+          <div class="t-mock-top">
+            <span class="t-mock-title">Biology · Class Quiz</span>
+            <span class="t-mock-timer">24:59</span>
           </div>
-          <div class="app-card app-stat">
-            <p class="app-stat-label">Students</p>
-            <p class="app-stat-value">0</p>
-          </div>
-          <div class="app-card app-stat">
-            <p class="app-stat-label">Assignments</p>
-            <p class="app-stat-value">0</p>
-          </div>
-          <div class="app-card app-stat">
-            <p class="app-stat-label">Average performance</p>
-            <p class="app-stat-value">—</p>
-          </div>
-        </section>
+          <div class="t-mock-bar"><span></span></div>
+          <p class="t-mock-count">Question 7 of 20</p>
+          <p class="t-mock-q">Which part of the cell controls its activities?</p>
+          <ul class="t-mock-options">
+            <li><b>A</b> Cell wall</li>
+            <li class="is-picked"><b>B</b> Nucleus</li>
+            <li><b>C</b> Vacuole</li>
+            <li><b>D</b> Cytoplasm</li>
+          </ul>
+          <p class="t-mock-caption">Illustration of how a quiz could look</p>
+        </div>
+      </div>
+    </section>
 
-        <section class="app-section" aria-labelledby="actionsHeading">
-          <h2 id="actionsHeading">Quick actions</h2>
-          <div class="app-grid">
-            <div class="app-card app-action is-soon">
-              <div class="app-action-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-              </div>
-              <h3>Create an exam</h3>
-              <p>Build a timed quiz for your class with your own questions.</p>
-              <span class="app-soon">Soon</span>
-            </div>
-            <div class="app-card app-action is-soon">
-              <div class="app-action-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
-              </div>
-              <h3>Build a question bank</h3>
-              <p>Save questions once and reuse them in any exam.</p>
-              <span class="app-soon">Soon</span>
-            </div>
-            <div class="app-card app-action is-soon">
-              <div class="app-action-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 4.5a3.5 3.5 0 010 7"/><path d="M18 14.5a6.5 6.5 0 013.5 5.5"/></svg>
-              </div>
-              <h3>Add your students</h3>
-              <p>Group students into classes so you can assign work.</p>
-              <span class="app-soon">Soon</span>
-            </div>
-            <div class="app-card app-action is-soon">
-              <div class="app-action-icon">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
-              </div>
-              <h3>View results</h3>
-              <p>See scores and spot the questions your class finds hardest.</p>
-              <span class="app-soon">Soon</span>
-            </div>
-          </div>
-        </section>
+    <!-- Honest status -->
+    <section class="t-status">
+      <div class="container">
+        <div class="t-status-box" role="note">
+          <strong>Teacher tools are being rolled out.</strong> You can create your teacher account today. Features marked "Soon" below are in development and will become available in stages.
+        </div>
+      </div>
+    </section>
 
-        <section class="app-section" aria-labelledby="examsHeading">
-          <h2 id="examsHeading">Your exams</h2>
-          <div class="app-card app-empty">
-            <div class="app-empty-icon">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h6"/></svg>
-            </div>
-            <h3>No exams yet</h3>
-            <p>Once exam creation is ready, the exams you create will appear here.</p>
-            <a class="btn btn-secondary" href="support.html">Contact support</a>
-          </div>
-        </section>
+    <!-- Features -->
+    <section class="t-section" id="features">
+      <div class="container">
+        <div class="t-head">
+          <span class="t-eyebrow">FEATURES</span>
+          <h2>Everything a teacher needs to test with confidence</h2>
+          <p>Built around how exams actually work in Nigerian schools: shared phones, patchy data and large classes.</p>
+        </div>
 
-      </main>
+        <div class="t-grid">
+          <article class="t-card">
+            <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+            <h3>Question bank</h3>
+            <p>Write your questions once, tag them by subject and topic, and reuse them across exams.</p>
+            <span class="t-soon">Soon</span>
+          </article>
+
+          <article class="t-card">
+            <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6"/></svg></div>
+            <h3>Timed exams</h3>
+            <p>Set a duration, a start and end time, and let the quiz submit itself when time is up.</p>
+            <span class="t-soon">Soon</span>
+          </article>
+
+          <article class="t-card">
+            <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg></div>
+            <h3>Randomised questions</h3>
+            <p>Shuffle question and answer order so students sitting next to each other see different papers.</p>
+            <span class="t-soon">Soon</span>
+          </article>
+
+          <article class="t-card">
+            <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h6"/></svg></div>
+            <h3>Assignments</h3>
+            <p>Give homework with a due date and see who has submitted and who hasn't.</p>
+            <span class="t-soon">Soon</span>
+          </article>
+
+          <article class="t-card">
+            <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+            <h3>Results and insights</h3>
+            <p>See class scores and the questions most students missed, so you know what to re-teach.</p>
+            <span class="t-soon">Soon</span>
+          </article>
+
+          <article class="t-card">
+            <div class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 4.5a3.5 3.5 0 010 7"/><path d="M18 14.5a6.5 6.5 0 013.5 5.5"/></svg></div>
+            <h3>Class setup</h3>
+            <p>Organise students into classes so each exam and assignment goes to the right group.</p>
+            <span class="t-soon">Soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="t-section t-section-alt" id="how-it-works">
+      <div class="container">
+        <div class="t-head">
+          <span class="t-eyebrow">HOW IT WORKS</span>
+          <h2>From sign-up to results in three steps</h2>
+          <p>This is the flow we're building toward.</p>
+        </div>
+
+        <ol class="t-steps">
+          <li class="t-step">
+            <h3>Create your account</h3>
+            <p>Sign up as a teacher with your email, phone number and school. It takes about a minute.</p>
+          </li>
+          <li class="t-step">
+            <h3>Build your exam</h3>
+            <p>Add questions from your bank, choose the time limit and decide how questions are shuffled.</p>
+          </li>
+          <li class="t-step">
+            <h3>Share and review</h3>
+            <p>Send it to your class, then check scores and the questions that tripped students up.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="t-section" id="benefits">
+      <div class="container">
+        <div class="t-head">
+          <span class="t-eyebrow">BENEFITS</span>
+          <h2>Good for teachers, better for students</h2>
+        </div>
+
+        <div class="t-benefits">
+          <div class="t-benefit">
+            <h3>For teachers</h3>
+            <ul>
+              <li>Spend less time marking and more time teaching</li>
+              <li>Reuse your best questions every term</li>
+              <li>Spot weak topics early with clear results</li>
+              <li>Run tests without printing papers</li>
+            </ul>
+          </div>
+          <div class="t-benefit">
+            <h3>For students</h3>
+            <ul>
+              <li>Practise in a format that feels like a real CBT exam</li>
+              <li>Works on a phone, with a clear and simple screen</li>
+              <li>Get results quickly, so mistakes can be fixed in time</li>
+              <li>Keep practising with past questions between tests</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="t-section t-section-alt" id="faq">
+      <div class="container">
+        <div class="t-head">
+          <span class="t-eyebrow">FAQ</span>
+          <h2>Questions teachers ask</h2>
+        </div>
+
+        <div class="t-faq">
+          <details>
+            <summary>What can I do today?</summary>
+            <p>You can create a teacher account and browse our <a href="past-questions.html">past questions</a>. Quiz, assignment and results tools are being built and will arrive in stages.</p>
+          </details>
+          <details>
+            <summary>Who is MySurePass for?</summary>
+            <p>Teachers, tutors and schools preparing Nigerian students for WAEC, JAMB, NECO and NABTEB exams.</p>
+          </details>
+          <details>
+            <summary>Do my students need an account?</summary>
+            <p>Students can already <a href="register.html">create a free student account</a> to practise. How students join a teacher's class will be explained when class tools launch.</p>
+          </details>
+          <details>
+            <summary>How is my information handled?</summary>
+            <p>We explain what we collect and why in our <a href="privacy.html">Privacy Policy</a>, and the rules for using the platform in our <a href="terms.html">Terms of Service</a>.</p>
+          </details>
+          <details>
+            <summary>I have a question that isn't here</summary>
+            <p>Reach us any time through our <a href="support.html">support page</a>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="t-section t-cta">
+      <div class="container">
+        <div class="t-cta-box">
+          <h2>Ready to get started?</h2>
+          <p>Create your teacher account now and be set up when new tools arrive.</p>
+          <div class="t-cta-actions">
+            <a href="register.html" class="btn btn-primary btn-lg">Create teacher account</a>
+            <a href="support.html" class="btn btn-secondary btn-lg">Talk to us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="MySurePass home">
+          <img src="assets/images/logo.svg" alt="" width="34" height="34" />
+          <span>MySurePass</span>
+        </a>
+        <p>Nigeria's technology-driven learning support hub. Prepare for WAEC, JAMB, and NECO exams with ultimate confidence.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter/X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.844L2.25 2.25h6.838l4.26 5.625L18.244 2.25zm-1.162 17.5h1.833L7.084 4.126H5.117L17.082 19.75z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>PRODUCT</h3>
+        <ul>
+          <li><a href="past-questions.html">Past Questions</a></li>
+          <li><a href="cbt-practice.html">Practice Exams</a></li>
+          <li><a href="subjects.html">Revision Guides</a></li>
+          <li><a href="api.html">API Integrations</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>COMPANY</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="teachers.html">For Teachers</a></li>
+          <li><a href="support.html">Careers</a></li>
+          <li><a href="support.html">Press Media</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>SUPPORT</h3>
+        <ul>
+          <li><a href="support.html">Help Center</a></li>
+          <li><a href="support.html">Status Updates</a></li>
+          <li><a href="support.html">Safety Rules</a></li>
+          <li><a href="support.html">Contact Support</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>LEGAL</h3>
+        <ul>
+          <li><a href="privacy.html">Privacy Charter</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html#cookies">Cookie Policy</a></li>
+          <li><a href="terms.html">NLA Guide</a></li>
+        </ul>
+      </div>
+
     </div>
-  </div>
 
+    <div class="container footer-bottom">
+      <span>© 2026 MySurePass Technologies. Built for premium results.</span>
+      <span class="footer-location">Lagos, Nigeria • West Africa</span>
+    </div>
+  </footer>
+
+  <script src="script/pages-shared.js" defer></script>
 </body>
 </html>
