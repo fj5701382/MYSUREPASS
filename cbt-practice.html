@@ -40,13 +40,8 @@
         <form class="cbt-card cbt-form" id="cbtForm">
           <div class="cbt-field">
             <label for="cbtSubject">Subject</label>
-            <select id="cbtSubject" required>
-              <option>Mathematics</option>
-              <option>English Language</option>
-              <option>Biology</option>
-              <option>Chemistry</option>
-              <option>Physics</option>
-            </select>
+            <!-- The subject list is filled in by script/cbt-practice.js -->
+            <select id="cbtSubject" required></select>
           </div>
 
           <div class="cbt-row">
@@ -55,6 +50,8 @@
               <select id="cbtCount">
                 <option value="5">5 questions</option>
                 <option value="10" selected>10 questions</option>
+                <option value="20">20 questions</option>
+                <option value="40">40 questions</option>
               </select>
             </div>
             <div class="cbt-field">
@@ -64,6 +61,9 @@
                 <option value="5">5 minutes</option>
                 <option value="10" selected>10 minutes</option>
                 <option value="15">15 minutes</option>
+                <option value="20">20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="45">45 minutes</option>
               </select>
             </div>
           </div>
@@ -80,10 +80,12 @@
             <small>Used later to personalise your practice. Saved on this device only.</small>
           </div>
 
-          <button class="btn btn-primary btn-lg" type="submit">Start test</button>
+          <p class="cbt-error" id="cbtError" role="alert" hidden></p>
+
+          <button class="btn btn-primary btn-lg" type="submit" id="startBtn">Start test</button>
         </form>
 
-        <p class="cbt-note">These are <strong>sample practice questions</strong> so you can try the CBT experience. They are not real past exam papers. Full past-question sets are coming. You can already browse <a href="past-questions.html">past questions</a>.</p>
+        <p class="cbt-note">Questions marked <strong>sample</strong> are practice questions we wrote. <strong>JAMB past questions</strong> only appear for subjects whose answers have been checked. You can also browse <a href="past-questions.html">past questions</a>.</p>
       </section>
 
       <!-- 2. Test -->

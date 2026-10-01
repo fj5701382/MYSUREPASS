@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const SESSION_KEY = 'msp_cbt_session';
   const HISTORY_KEY = 'msp_cbt_history';
   const LEVEL_KEY = 'msp_cbt_level';
-  const LETTERS = ['A', 'B', 'C', 'D'];
+  const LETTERS = ['A', 'B', 'C', 'D', 'E'];
+  const MIN_POOL = 5; // smallest test we will start
 
-  // Sample practice questions. TODO: replace with the real question bank / API.
+  // ─────────────────────────────────────────────────────────────
+  // SAMPLE QUESTIONS (always available, answers included)
+  // ─────────────────────────────────────────────────────────────
   const BANK = {
     'Mathematics': [
       { q: 'Simplify 3/4 + 2/3.', o: ['5/7', '17/12', '1/2', '1 1/12'], a: 1, e: '3/4 + 2/3 = 9/12 + 8/12 = 17/12, which is 1 5/12.' },
@@ -76,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const countSelect = $('cbtCount');
   const timeSelect = $('cbtTime');
   const levelSelect = $('cbtLevel');
+  const startBtn = $('startBtn');
+  const errorBox = $('cbtError');
   const resumeCard = $('resumeCard');
   const resumeText = $('resumeText');
   const testSubject = $('testSubject');
@@ -97,8 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let session = null;
   let timerId = null;
   let announced = {};
+  let lastRun = null;
+  let jambSubjects = []; // [{ key, label }] ready to use
 
-  // ── Storage helpers (all wrapped: storage can be unavailable) ──
+  // ── Storage helpers ──
   function readJSON(key, fallback) {
     try {
       const raw = localStorage.getItem(key);
@@ -161,33 +168,110 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof dialog.showModal === 'function') dialog.showModal();
   }
 
+  function showError(message) {
+    errorBox.textContent = message;
+    errorBox.hidden = !message;
+  }
+
+  // Options that point at other options must keep their order.
+  function mustKeepOrder(options) {
+    return options.some((text) => /\b(above|below|both|all of|none of|neither|[A-E] and [A-E]|[A-E] only)\b/i.test(text));
+  }
+
+  // ── Loading question sets ──
+  async function fetchJSON(path) {
+    const response = await fetch(path, { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`${path} ${response.status}`);
+    return response.json();
+  }
+
+  function sampleEntries(label) {
+    return BANK[label].map((entry) => ({ q: entry.q, o: entry.o, a: entry.a, why: entry.e, src: '' }));
+  }
+
+  // Only questions that have an answer key are used in scored tests.
+  async function jambEntries(key) {
+    const [data, keys] = await Promise.all([
+      fetchJSON(`data/questions/${key}.json`),
+      fetchJSON(`data/keys/${key}.json`).catch(() => ({}))
+    ]);
+
+    return data.questions
+      .map((entry) => {
+        const letter = keys[entry.id];
+        const index = LETTERS.indexOf(letter);
+        if (index < 0 || index >= entry.o.length) return null;
+        return {
+          q: entry.q,
+          o: entry.o,
+          a: index,
+          why: '',
+          src: entry.y ? `JAMB ${entry.y}` : 'JAMB past question'
+        };
+      })
+      .filter(Boolean);
+  }
+
+  async function loadEntries(value) {
+    const [source, key] = value.split('|');
+    if (source === 'sample') return { label: key, entries: sampleEntries(key) };
+    const info = jambSubjects.find((subject) => subject.key === key);
+    return { label: info ? info.label : key, entries: await jambEntries(key) };
+  }
+
   // ── Starting a test ──
-  function startTest(subject, count, minutes, level) {
-    const picked = shuffle(BANK[subject]).slice(0, count).map((entry) => {
-      const order = shuffle(entry.o.map((_, index) => index));
+  function makeItems(entries, count) {
+    return shuffle(entries).slice(0, count).map((entry) => {
+      const keep = mustKeepOrder(entry.o);
+      const order = keep ? entry.o.map((_, index) => index) : shuffle(entry.o.map((_, index) => index));
       return {
         q: entry.q,
         options: order.map((index) => entry.o[index]),
         correct: order.indexOf(entry.a),
-        why: entry.e
+        why: entry.why || '',
+        src: entry.src || ''
       };
     });
+  }
 
-    const now = Date.now();
-    session = {
-      subject,
-      level,
-      minutes,
-      items: picked,
-      answers: picked.map(() => null),
-      flags: picked.map(() => false),
-      current: 0,
-      startedAt: now,
-      endsAt: minutes ? now + minutes * 60000 : null
-    };
+  async function startFromForm(value, count, minutes, level) {
+    showError('');
+    startBtn.disabled = true;
+    startBtn.textContent = 'Loading questions...';
 
-    persist();
-    beginTest();
+    try {
+      const { label, entries } = await loadEntries(value);
+      if (entries.length < MIN_POOL) {
+        showError('This subject does not have enough questions with checked answers yet. Please choose another subject.');
+        return;
+      }
+
+      const total = Math.min(count, entries.length);
+      const items = makeItems(entries, total);
+      const now = Date.now();
+
+      lastRun = { value, count, minutes, level };
+      session = {
+        subject: label,
+        level,
+        minutes,
+        items,
+        answers: items.map(() => null),
+        flags: items.map(() => false),
+        current: 0,
+        startedAt: now,
+        endsAt: minutes ? now + minutes * 60000 : null,
+        run: lastRun
+      };
+
+      persist();
+      beginTest();
+    } catch (error) {
+      showError("We couldn't load the questions. Check your connection and try again. If you opened this page as a file, run the site with Live Server instead.");
+    } finally {
+      startBtn.disabled = false;
+      startBtn.textContent = 'Start test';
+    }
   }
 
   function beginTest() {
@@ -236,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const index = session.current;
     const item = session.items[index];
 
-    qNumber.textContent = `Question ${index + 1} of ${session.items.length}`;
+    qNumber.textContent = `Question ${index + 1} of ${session.items.length}${item.src ? ` · ${item.src}` : ''}`;
     qText.textContent = item.q;
     qOptions.replaceChildren();
 
@@ -380,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     writeJSON(HISTORY_KEY, history.slice(-20));
 
+    if (session.run) lastRun = session.run;
     renderResult({ session, correct, wrong, skipped, total, percent, elapsed, auto });
 
     session = null;
@@ -402,12 +487,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let message;
     if (percent >= 70) message = 'Great work! You know this material well. Keep the momentum going.';
     else if (percent >= 50) message = 'Good effort. A little more practice and review will lift this score.';
-    else message = "Keep practising. Read the explanations below, then try again. You'll improve.";
+    else message = "Keep practising. Review the answers below, then try again. You'll improve.";
     $('scoreMessage').textContent = message;
 
     $('resultNotice').hidden = !auto || elapsed < (s.minutes || 0) * 60 - 1;
-    s.lastSubject = s.subject;
-    lastRun = { subject: s.subject, count: total, minutes: s.minutes, level: s.level };
 
     const list = $('reviewList');
     list.replaceChildren();
@@ -417,7 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = el('article', 'cbt-card cbt-review-item');
 
       const top = el('div', 'cbt-review-top');
-      top.append(el('span', '', `Question ${i + 1}`));
+      top.append(el('span', '', `Question ${i + 1}${item.src ? ` · ${item.src}` : ''}`));
       top.append(el('span', `cbt-badge is-${status}`, status === 'right' ? 'Correct' : status === 'wrong' ? 'Incorrect' : 'Not answered'));
       card.append(top, el('h3', '', item.q));
 
@@ -425,16 +508,14 @@ document.addEventListener('DOMContentLoaded', () => {
         card.append(el('p', '', `Your answer: ${chosen === null ? 'None' : `${LETTERS[chosen]}. ${item.options[chosen]}`}`));
       }
       card.append(el('p', '', `Correct answer: ${LETTERS[item.correct]}. ${item.options[item.correct]}`));
-      card.append(el('p', 'cbt-why', item.why));
+      if (item.why) card.append(el('p', 'cbt-why', item.why));
       list.append(card);
     });
   }
 
-  let lastRun = null;
-
   $('retryBtn').addEventListener('click', () => {
     if (!lastRun) return showSetup();
-    startTest(lastRun.subject, lastRun.count, lastRun.minutes, lastRun.level);
+    startFromForm(lastRun.value, lastRun.count, lastRun.minutes, lastRun.level);
   });
 
   $('newBtn').addEventListener('click', showSetup);
@@ -442,14 +523,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Setup screen ──
   function showSetup() {
     showScreen('setup');
+    showError('');
     checkForSavedSession();
   }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const subject = subjectSelect.value;
     const level = levelSelect.value;
-    if (!BANK[subject]) return;
 
     try {
       localStorage.setItem(LEVEL_KEY, level);
@@ -457,9 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
       /* ignore */
     }
 
-    const count = Math.min(Number(countSelect.value), BANK[subject].length);
-    const minutes = Number(timeSelect.value);
-    startTest(subject, count, minutes, level);
+    startFromForm(subjectSelect.value, Number(countSelect.value), Number(timeSelect.value), level);
   });
 
   function checkForSavedSession() {
@@ -486,6 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saved = readJSON(SESSION_KEY, null);
     if (!saved) return;
     session = saved;
+    if (session.run) lastRun = session.run;
     resumeCard.hidden = true;
     beginTest();
   });
@@ -494,6 +573,34 @@ document.addEventListener('DOMContentLoaded', () => {
     removeKey(SESSION_KEY);
     resumeCard.hidden = true;
   });
+
+  // ── Build the subject list ──
+  function addGroup(label, options) {
+    if (!options.length) return;
+    const group = document.createElement('optgroup');
+    group.label = label;
+    options.forEach(({ value, text }) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = text;
+      group.append(option);
+    });
+    subjectSelect.append(group);
+  }
+
+  async function buildSubjectList() {
+    subjectSelect.replaceChildren();
+
+    try {
+      const index = await fetchJSON('data/questions/index.json');
+      jambSubjects = index.subjects.filter((subject) => subject.ready);
+    } catch (error) {
+      jambSubjects = []; // JAMB sets are optional: samples still work
+    }
+
+    addGroup('JAMB past questions', jambSubjects.map((s) => ({ value: `jamb|${s.key}`, text: s.label })));
+    addGroup('Sample questions', Object.keys(BANK).map((label) => ({ value: `sample|${label}`, text: label })));
+  }
 
   // Remembered class level
   try {
@@ -504,5 +611,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   showScreen('setup');
-  checkForSavedSession();
+  buildSubjectList().then(checkForSavedSession);
 });
