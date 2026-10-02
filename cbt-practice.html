@@ -1,196 +1,268 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>CBT Practice — MySurePass</title>
-  <meta name="description" content="Practise in a computer-based test format: choose a subject, set a timer, answer questions one at a time and review your results." />
+  <meta name="description" content="Practice mode designed to feel like a real UTME exam room." />
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
   <link rel="stylesheet" href="style/style.css" />
   <link rel="stylesheet" href="style/responsive.css" />
   <link rel="stylesheet" href="style/pages-shared.css" />
   <link rel="stylesheet" href="style/cbt-practice.css" />
 </head>
 <body>
-
   <a class="skip-link" href="#main">Skip to main content</a>
   <div data-shared-navbar></div>
 
-  <main id="main" class="cbt">
+  <main id="main" class="cbt-main-wrap">
     <div class="container">
+      <section id="settingsScreen" class="cbt-panel cbt-settings-screen">
+        <div class="cbt-header-block">
+          <span class="cbt-eyebrow">CBT PRACTICE</span>
+          <h1>Set up your exam</h1>
+          <p>Choose your subjects, timing, and mode to match a real UTME-style exam room.</p>
+        </div>
 
-      <!-- 1. Setup -->
-      <section class="cbt-setup" id="cbtSetup">
-        <span class="cbt-eyebrow">CBT PRACTICE</span>
-        <h1>Practise like it's the real exam</h1>
-        <p class="cbt-lead">Pick a subject, set your timer and answer one question at a time, just like a computer-based test.</p>
-
-        <div class="cbt-card cbt-resume" id="resumeCard" hidden>
+        <div id="resumeCard" class="resume-card" hidden>
           <p id="resumeText"></p>
-          <div class="cbt-inline-actions">
-            <button class="btn btn-primary" type="button" id="resumeBtn">Resume test</button>
-            <button class="btn btn-secondary" type="button" id="discardBtn">Discard it</button>
+          <div class="inline-actions">
+            <button id="resumeBtn" class="btn btn-primary" type="button">Resume test</button>
+            <button id="discardBtn" class="btn btn-secondary" type="button">Discard it</button>
           </div>
         </div>
 
-        <form class="cbt-card cbt-form" id="cbtForm">
-          <div class="cbt-field">
-            <label for="cbtSubject">Subject</label>
-            <!-- The subject list is filled in by script/cbt-practice.js -->
-            <select id="cbtSubject" required></select>
-          </div>
-
-          <div class="cbt-row">
-            <div class="cbt-field">
-              <label for="cbtCount">Number of questions</label>
-              <select id="cbtCount">
-                <option value="5">5 questions</option>
-                <option value="10" selected>10 questions</option>
-                <option value="20">20 questions</option>
-                <option value="40">40 questions</option>
+        <form id="settingsForm" class="cbt-form" novalidate>
+          <div class="field-row two-up">
+            <div class="field-group">
+              <label for="usernameInput">Username (optional)</label>
+              <input id="usernameInput" type="text" maxlength="80" placeholder="Candidate name" />
+            </div>
+            <div class="field-group">
+              <label for="examYearSelect">Exam year</label>
+              <select id="examYearSelect">
+                <option value="Any year">Any year</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
               </select>
             </div>
-            <div class="cbt-field">
-              <label for="cbtTime">Timer</label>
-              <select id="cbtTime">
-                <option value="0">No timer</option>
-                <option value="5">5 minutes</option>
-                <option value="10" selected>10 minutes</option>
-                <option value="15">15 minutes</option>
+          </div>
+
+          <div class="field-group">
+            <div class="field-head">
+              <label>Subjects</label>
+              <span class="field-meta">English is compulsory and always comes first.</span>
+            </div>
+            <div id="subjectPicker" class="subject-picker" aria-label="Subject selection"></div>
+          </div>
+
+          <div class="field-row two-up">
+            <div class="field-group">
+              <label for="questionCountSelect">Number of questions per subject</label>
+              <select id="questionCountSelect">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="durationSelect">Duration</label>
+              <select id="durationSelect">
+                <option value="auto">Automatic (~40 sec/question)</option>
+                <option value="10">10 minutes</option>
                 <option value="20">20 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
+                <option value="60">60 minutes</option>
+                <option value="90">90 minutes</option>
+                <option value="120">120 minutes</option>
+                <option value="180">180 minutes</option>
+                <option value="0">No timer</option>
               </select>
             </div>
           </div>
 
-          <div class="cbt-field">
-            <label for="cbtLevel">Your class level (optional)</label>
-            <select id="cbtLevel">
-              <option value="">Prefer not to say</option>
-              <option value="SS1">SS1</option>
-              <option value="SS2">SS2</option>
-              <option value="SS3">SS3</option>
-              <option value="Candidate">Exam candidate (JAMB / WAEC / NECO)</option>
-            </select>
-            <small>Used later to personalise your practice. Saved on this device only.</small>
+          <div class="field-group">
+            <label>Mode</label>
+            <div class="mode-options" role="radiogroup" aria-label="Exam mode selection">
+              <label class="mode-option">
+                <input type="radio" name="examMode" value="practice" checked />
+                <span>
+                  <strong>Practice</strong>
+                  <small>Check answer is allowed for feedback and corrections.</small>
+                </span>
+              </label>
+              <label class="mode-option">
+                <input type="radio" name="examMode" value="exam" />
+                <span>
+                  <strong>Exam</strong>
+                  <small>Strict timing, no hints, and no answer checking before the end.</small>
+                </span>
+              </label>
+            </div>
           </div>
 
-          <p class="cbt-error" id="cbtError" role="alert" hidden></p>
+          <div class="field-group">
+            <label>Shuffle / order</label>
+            <div class="check-stack">
+              <label class="check-option">
+                <input id="shuffleQuestionsToggle" type="checkbox" checked />
+                <span>Shuffle questions</span>
+              </label>
+              <label class="check-option">
+                <input id="shuffleOptionsToggle" type="checkbox" checked />
+                <span>Shuffle answer options</span>
+              </label>
+            </div>
+          </div>
 
-          <button class="btn btn-primary btn-lg" type="submit" id="startBtn">Start test</button>
+          <p id="settingsMessage" class="settings-message" hidden role="status" aria-live="polite"></p>
+
+          <div class="form-actions">
+            <button id="startBtn" class="btn btn-primary" type="submit">Start exam</button>
+          </div>
         </form>
 
-        <p class="cbt-note">Questions marked <strong>sample</strong> are practice questions we wrote. <strong>JAMB past questions</strong> only appear for subjects whose answers have been checked. You can also browse <a href="past-questions.html">past questions</a>.</p>
+        <div class="history-box">
+          <h2>Recent results</h2>
+          <ul id="recentResultsList" class="recent-results-list"></ul>
+        </div>
       </section>
 
-      <!-- 2. Test -->
-      <section id="cbtTest" hidden aria-label="Practice test">
-        <div class="cbt-bar">
-          <h2 class="cbt-bar-title" id="testSubject">Practice</h2>
-          <div class="cbt-bar-end">
-            <div class="cbt-timer" id="timer" role="timer" aria-label="Time remaining">
-              <span id="timerText">0:00</span>
-            </div>
-            <button class="btn btn-secondary" type="button" id="quitBtn">Quit</button>
-            <button class="btn btn-primary" type="button" id="submitBtn">Submit test</button>
-          </div>
-        </div>
-        <p class="cbt-sr" id="timerAnnounce" aria-live="polite"></p>
-
-        <div class="cbt-progress" aria-hidden="true"><span id="progressFill"></span></div>
-
-        <div class="cbt-layout">
-          <div class="cbt-card cbt-question">
-            <p class="cbt-qnum" id="qNumber">Question 1</p>
-            <fieldset class="cbt-fieldset">
-              <legend class="cbt-qtext" id="qText" tabindex="-1"></legend>
-              <div class="cbt-options" id="qOptions"></div>
-            </fieldset>
-
-            <div class="cbt-actions">
-              <button class="btn btn-secondary" type="button" id="prevBtn">Previous</button>
-              <button class="btn btn-secondary" type="button" id="flagBtn" aria-pressed="false">Mark for review</button>
-              <button class="btn btn-secondary" type="button" id="clearBtn">Clear answer</button>
-              <span class="cbt-spacer"></span>
-              <button class="btn btn-primary" type="button" id="nextBtn">Next</button>
-            </div>
+      <section id="testScreen" class="cbt-test-screen" hidden>
+        <header class="cbt-topbar">
+          <div class="cbt-user-meta">
+            <span id="testUsername" class="test-username">Candidate</span>
+            <span id="testModePill" class="mode-pill">Practice</span>
           </div>
 
-          <aside class="cbt-card cbt-palette" aria-label="Question navigator">
-            <h2>Questions</h2>
-            <div class="cbt-palette-grid" id="palette"></div>
-            <ul class="cbt-legend">
-              <li><span class="cbt-dot is-answered"></span> Answered</li>
-              <li><span class="cbt-dot is-flagged"></span> Marked for review</li>
-              <li><span class="cbt-dot is-current"></span> Current question</li>
-              <li><span class="cbt-dot"></span> Not answered</li>
-            </ul>
+          <div class="cbt-top-actions">
+            <div id="timerBox" class="timer-box" role="timer" aria-live="polite" aria-atomic="true">
+              <span class="timer-label">Time</span>
+              <span id="timerDisplay">00:00</span>
+            </div>
+            <button id="calcBtn" class="btn btn-secondary" type="button">Calculator</button>
+            <button id="quitBtn" class="btn btn-ghost" type="button">Quit</button>
+            <button id="submitBtn" class="btn btn-primary" type="button">Submit</button>
+          </div>
+        </header>
+
+        <p id="lockNotice" class="lock-notice" hidden></p>
+        <div id="subjectTabs" class="subject-tabs" aria-label="Subject tabs"></div>
+
+        <div class="cbt-content-row">
+          <div class="cbt-question-panel">
+            <div class="question-meta-wrap">
+              <span id="questionMeta" class="question-meta"></span>
+            </div>
+            <h2 id="questionText" class="question-text" tabindex="-1"></h2>
+            <div id="answerOptions" class="answer-options" role="radiogroup" aria-label="Answer options"></div>
+            <div id="answerFeedback" class="answer-feedback" hidden></div>
+
+            <div class="question-tools">
+              <button id="prevBtn" class="btn btn-secondary" type="button">Previous</button>
+              <button id="clearBtn" class="btn btn-secondary" type="button">Clear</button>
+              <button id="saveBtn" class="btn btn-secondary" type="button">Save question</button>
+              <button id="checkBtn" class="btn btn-primary" type="button">Check answer</button>
+              <button id="nextBtn" class="btn btn-primary" type="button">Next</button>
+            </div>
+          </div>
+
+          <aside class="cbt-navigator-panel">
+            <div class="navigator-header">
+              <h3 id="navigatorSubject">English Language</h3>
+              <span id="navigatorStatus">0 of 0</span>
+            </div>
+            <div id="navigatorGrid" class="navigator-grid" aria-label="Question navigator"></div>
           </aside>
         </div>
       </section>
 
-      <!-- 3. Result -->
-      <section class="cbt-result" id="cbtResult" hidden>
-        <span class="cbt-eyebrow" id="resultTitle">RESULTS</span>
-        <h1 id="resultHeading" tabindex="-1">Your results</h1>
-
-        <p class="cbt-note" id="resultNotice" hidden>Time's up! Your test was submitted automatically.</p>
-
-        <div class="cbt-card cbt-score">
-          <p class="cbt-score-value" id="scoreValue">0 / 0</p>
-          <p class="cbt-score-percent" id="scorePercent">0%</p>
-          <p class="cbt-score-message" id="scoreMessage"></p>
+      <section id="resultsScreen" class="cbt-results-screen" hidden>
+        <div class="results-header-block">
+          <span class="cbt-eyebrow">RESULTS</span>
+          <h1 id="resultsHeading">Your results</h1>
         </div>
 
-        <div class="cbt-stats">
-          <div class="cbt-card cbt-stat"><b id="statCorrect">0</b><span>Correct</span></div>
-          <div class="cbt-card cbt-stat"><b id="statWrong">0</b><span>Incorrect</span></div>
-          <div class="cbt-card cbt-stat"><b id="statSkipped">0</b><span>Not answered</span></div>
-          <div class="cbt-card cbt-stat"><b id="statTime">0:00</b><span>Time used</span></div>
+        <p id="resultsNotice" class="results-notice" hidden>Time is up. Your test was submitted automatically.</p>
+
+        <div class="score-card">
+          <div class="score-topline">
+            <div id="scoreValue" class="score-value">0 / 0</div>
+            <div id="scorePercent" class="score-percent">0%</div>
+          </div>
+          <p id="scoreMessage" class="score-message"></p>
         </div>
 
-        <div class="cbt-result-actions">
-          <button class="btn btn-primary" type="button" id="retryBtn">Try again</button>
-          <button class="btn btn-secondary" type="button" id="newBtn">Choose another subject</button>
-          <a class="btn btn-secondary" href="dashboard.html">Back to dashboard</a>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <strong id="statCorrect">0</strong>
+            <span>Correct</span>
+          </div>
+          <div class="stat-card">
+            <strong id="statIncorrect">0</strong>
+            <span>Incorrect</span>
+          </div>
+          <div class="stat-card">
+            <strong id="statUnanswered">0</strong>
+            <span>Not answered</span>
+          </div>
+          <div class="stat-card">
+            <strong id="statTime">0:00</strong>
+            <span>Time used</span>
+          </div>
         </div>
 
-        <div class="cbt-review">
-          <h2>Review your answers</h2>
-          <div class="cbt-review-list" id="reviewList"></div>
+        <div id="subjectSummary" class="subject-summary"></div>
+
+        <div class="results-actions">
+          <button id="retryBtn" class="btn btn-primary" type="button">Try again</button>
+          <button id="newTestBtn" class="btn btn-secondary" type="button">New test</button>
+          <button id="savedViewBtn" class="btn btn-secondary" type="button">Saved questions</button>
+          <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
+        </div>
+
+        <div class="review-panel">
+          <div class="review-toolbar">
+            <h2>Full corrections</h2>
+            <div class="review-filters">
+              <select id="reviewFilterSelect" aria-label="Filter corrections by status">
+                <option value="all">All</option>
+                <option value="incorrect">Incorrect</option>
+                <option value="unanswered">Not answered</option>
+                <option value="saved">Saved</option>
+              </select>
+              <select id="reviewSubjectSelect" aria-label="Filter by subject"></select>
+            </div>
+          </div>
+          <div id="reviewList" class="review-list"></div>
         </div>
       </section>
 
+      <section id="savedScreen" class="cbt-saved-screen" hidden>
+        <div class="results-header-block">
+          <span class="cbt-eyebrow">SAVED QUESTIONS</span>
+          <h1>Review later</h1>
+        </div>
+        <div id="savedQuestionsList" class="saved-list"></div>
+        <div class="results-actions">
+          <button id="savedBackBtn" class="btn btn-secondary" type="button">Back to setup</button>
+        </div>
+      </section>
     </div>
   </main>
 
-  <!-- Dialogs -->
-  <dialog class="cbt-dialog" id="submitDialog" aria-labelledby="submitTitle">
-    <h2 id="submitTitle">Submit your test?</h2>
-    <p id="submitSummary"></p>
-    <div class="cbt-inline-actions">
-      <button class="btn btn-secondary" type="button" id="submitCancel">Go back</button>
-      <button class="btn btn-primary" type="button" id="submitConfirm">Submit test</button>
-    </div>
-  </dialog>
-
-  <dialog class="cbt-dialog" id="quitDialog" aria-labelledby="quitTitle">
-    <h2 id="quitTitle">Quit this test?</h2>
-    <p>Your answers so far will be lost and nothing will be scored.</p>
-    <div class="cbt-inline-actions">
-      <button class="btn btn-secondary" type="button" id="quitCancel">Keep going</button>
-      <button class="btn btn-primary" type="button" id="quitConfirm">Quit test</button>
-    </div>
-  </dialog>
-
   <footer class="site-footer">
     <div class="container footer-grid">
-
       <div class="footer-brand">
         <a href="index.html" class="footer-logo" aria-label="MySurePass home">
           <img src="assets/images/logo.svg" alt="" width="34" height="34" />
@@ -249,7 +321,6 @@
           <li><a href="terms.html">NLA Guide</a></li>
         </ul>
       </div>
-
     </div>
 
     <div class="container footer-bottom">
@@ -257,6 +328,52 @@
       <span class="footer-location">Lagos, Nigeria • West Africa</span>
     </div>
   </footer>
+
+  <dialog id="submitDialog" class="cbt-dialog" aria-labelledby="submitTitle">
+    <h2 id="submitTitle">Submit your test?</h2>
+    <p id="submitSummary"></p>
+    <div class="dialog-actions">
+      <button id="submitCancel" class="btn btn-secondary" type="button">Go back</button>
+      <button id="submitConfirm" class="btn btn-primary" type="button">Submit test</button>
+    </div>
+  </dialog>
+
+  <dialog id="quitDialog" class="cbt-dialog" aria-labelledby="quitTitle">
+    <h2 id="quitTitle">Quit this test?</h2>
+    <p>Your answers so far will be lost and nothing will be scored.</p>
+    <div class="dialog-actions">
+      <button id="quitCancel" class="btn btn-secondary" type="button">Keep going</button>
+      <button id="quitConfirm" class="btn btn-primary" type="button">Quit test</button>
+    </div>
+  </dialog>
+
+  <dialog id="calculatorDialog" class="cbt-dialog calculator-dialog" aria-labelledby="calculatorTitle">
+    <div class="dialog-head">
+      <h2 id="calculatorTitle">Calculator</h2>
+      <button id="calculatorClose" class="btn btn-ghost" type="button">Close</button>
+    </div>
+    <div id="calcDisplay" class="calc-display" aria-live="polite">0</div>
+    <div class="calc-grid">
+      <button class="calc-btn" data-value="C" type="button">C</button>
+      <button class="calc-btn" data-value="CE" type="button">CE</button>
+      <button class="calc-btn" data-value="/" type="button">÷</button>
+      <button class="calc-btn" data-value="*" type="button">×</button>
+      <button class="calc-btn" data-value="7" type="button">7</button>
+      <button class="calc-btn" data-value="8" type="button">8</button>
+      <button class="calc-btn" data-value="9" type="button">9</button>
+      <button class="calc-btn" data-value="-" type="button">−</button>
+      <button class="calc-btn" data-value="4" type="button">4</button>
+      <button class="calc-btn" data-value="5" type="button">5</button>
+      <button class="calc-btn" data-value="6" type="button">6</button>
+      <button class="calc-btn" data-value="+" type="button">+</button>
+      <button class="calc-btn" data-value="1" type="button">1</button>
+      <button class="calc-btn" data-value="2" type="button">2</button>
+      <button class="calc-btn" data-value="3" type="button">3</button>
+      <button class="calc-btn" data-value="=" type="button">=</button>
+      <button class="calc-btn calc-span-two" data-value="0" type="button">0</button>
+      <button class="calc-btn" data-value="." type="button">.</button>
+    </div>
+  </dialog>
 
   <script src="script/pages-shared.js" defer></script>
   <script src="script/cbt-practice.js" defer></script>
